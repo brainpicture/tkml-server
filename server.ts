@@ -1,6 +1,6 @@
 const PORT = 8348;
 const ROOT_DIR = './src'; // Корневая директория с TKML файлами
-const VERSION = '4';
+const VERSION = '5';
 
 // HTML wrapper template
 const HTML_WRAPPER = `<!DOCTYPE html>
