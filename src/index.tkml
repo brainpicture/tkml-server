@@ -1,0 +1,8 @@
+<title center>TKML</title>
+<br /><br />
+<input href='/' placeholder='Enter TKML app URL here' />
+<br /><br />
+<desc center>
+    <a href='examples/index.tkml'>examples</a>
+    <a href='docs/index.tkml'>docs</a>
+</desc>
