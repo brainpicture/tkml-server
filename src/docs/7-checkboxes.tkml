@@ -1,0 +1,58 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Checkboxes
+</header>
+
+<desc>
+    Being simple, TKML allowes you to create complex applications, for such
+    usecases TKML packed with various components wich allow you to create
+    complex applications.
+</desc>
+
+<title>Simple Checkboxes</title>
+<desc>
+    To add simple checkbox you can use <b>checkbox</b> tag.
+</desc>
+Example:
+<code>
+<checkbox>Default unchecked checkbox</checkbox>
+<checkbox checked="true">Pre-checked checkbox</checkbox>
+<checkbox disabled="true">Disabled checkbox</checkbox>
+<checkbox checked="true" disabled="true">Disabled checked checkbox</checkbox>
+</code>
+<checkbox>Default unchecked checkbox</checkbox>
+<checkbox checked="true">Pre-checked checkbox</checkbox>
+<checkbox disabled="true">Disabled checkbox</checkbox>
+<checkbox checked="true" disabled="true">Disabled checked checkbox</checkbox>
+
+<title>Interactive Checkboxes</title>
+<desc>Checkboxes can support actions via <b>href</b> attribute.
+    In this case page will be updated once checkbox state is changed.</desc>
+Example:
+<code>
+    <checkbox href="7-checkboxes.tkml?checked=1">
+        Checkbox with link
+    </checkbox>
+</code>
+<checkbox href="7-checkboxes.tkml?{{get.checked?'':'checked=1'}}" {{get.checked ?'checked':''}}>
+    Checkbox with link
+</checkbox>
+<checkbox id="result" href="7-checkboxes.tkml?{{get.checkedTarget?'':'checkedTarget=1'}}"
+    {{get.checkedTarget?'checked':''}} target="result">
+    Checkbox updating target block
+</checkbox>
+
+<title>Grouped Checkboxes</title>
+<desc>Multiple checkboxes in a group</desc>
+<list>
+    <checkbox name="option" value="1">Option 1</checkbox>
+    <checkbox name="option" value="2">Option 2</checkbox>
+    <checkbox name="option" value="3">Option 3</checkbox>
+</list>
+
+<footer>
+    <navigation>
+        <prev href="6-dynamic.tkml">Dynamic content</prev>
+        <next href="8-radio.tkml">Radio Buttons</next>
+    </navigation>
+</footer>

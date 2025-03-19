@@ -1,0 +1,111 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Radio Buttons
+</header>
+
+<desc>
+    Radio buttons allow users to select one option from a set. They're perfect for mutually exclusive choices
+    where only one selection is allowed at a time.
+</desc>
+
+<title>Basic Radio Buttons</title>
+<desc>
+    To create radio buttons, use the <b>radio</b> tag with a common <b>group</b> attribute to link related options.
+</desc>
+
+<code language="tkml">
+<list>
+    <radio group="size" checked>Small</radio>
+    <radio group="size">Medium</radio>
+    <radio group="size">Large</radio>
+</list>
+</code>
+
+<desc>Here's how it looks:</desc>
+<list>
+    <radio group="size" checked>Small</radio>
+    <radio group="size">Medium</radio>
+    <radio group="size">Large</radio>
+</list>
+
+<br />
+
+<title>Interactive Radio Buttons</title>
+<desc>
+    Radio buttons can use the <b>href</b> attribute to update the page when a selection is made.
+</desc>
+
+<code language="tkml">
+<list>
+    <radio group="color" href="8-radio.tkml?color=red" {{get.color === 'red' ? 'checked' : ''}}>Red</radio>
+    <radio group="color" href="8-radio.tkml?color=green" {{get.color === 'green' ? 'checked' : ''}}>Green</radio>
+    <radio group="color" href="8-radio.tkml?color=blue" {{get.color === 'blue' ? 'checked' : ''}}>Blue</radio>
+</list>
+</code>
+
+<desc>Try selecting different colors:</desc>
+<list>
+    <radio group="color" href="8-radio.tkml?color=red" {{get.color==='red' ? 'checked' : '' }}>Red</radio>
+    <radio group="color" href="8-radio.tkml?color=green" {{get.color==='green' ? 'checked' : '' }}>Green</radio>
+    <radio group="color" href="8-radio.tkml?color=blue" {{get.color==='blue' ? 'checked' : '' }}>Blue</radio>
+</list>
+
+{{get.color ? `<desc>You selected: ${get.color}</desc>` : ''}}
+
+<br />
+
+<title>Radio with Target Updates</title>
+<desc>
+    Radio buttons can update specific parts of the page using the <b>target</b> attribute.
+</desc>
+
+<code language="tkml">
+<list id="theme-result">
+    <radio group="theme" href="8-radio.tkml?theme=light" target="theme-result" 
+           {{get.theme === 'light' ? 'checked' : ''}}>Light Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=dark" target="theme-result" 
+           {{get.theme === 'dark' ? 'checked' : ''}}>Dark Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=system" target="theme-result" 
+           {{get.theme === 'system' ? 'checked' : ''}}>System Theme</radio>
+</list>
+</code>
+
+<desc>Try selecting different themes:</desc>
+<list id="theme-result">
+    <radio group="theme" href="8-radio.tkml?theme=light&target=1" target="theme-result" {{get.theme==='light'
+        ? 'checked' : '' }}>Light Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=dark&target=1" target="theme-result" {{get.theme==='dark' ? 'checked'
+        : '' }}>Dark Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=system&target=1" target="theme-result" {{get.theme==='system'
+        ? 'checked' : '' }}>System Theme</radio>
+</list>
+
+{{get.theme ? `<desc>Current theme: ${get.theme}</desc>` : ''}}
+
+<br />
+
+<title>Disabled Radio Buttons</title>
+<desc>
+    Radio buttons can be disabled using the <b>disabled</b> attribute.
+</desc>
+
+<code language="tkml">
+<list>
+    <radio group="plan" checked>Free Plan</radio>
+    <radio group="plan">Pro Plan</radio>
+    <radio group="plan" disabled>Enterprise Plan (Coming Soon)</radio>
+</list>
+</code>
+
+<list>
+    <radio group="plan" checked>Free Plan</radio>
+    <radio group="plan">Pro Plan</radio>
+    <radio group="plan" disabled>Enterprise Plan (Coming Soon)</radio>
+</list>
+
+<footer>
+    <navigation>
+        <prev href="7-checkboxes.tkml">Checkboxes</prev>
+        <next href="9-loader.tkml">Loader</next>
+    </navigation>
+</footer>

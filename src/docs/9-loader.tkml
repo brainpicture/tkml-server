@@ -1,0 +1,75 @@
+{{include("9-loader.ts")}}
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Autoload more content
+</header>
+<desc>
+    Frequent pattern in modern apps is to load more content when user scrolls to the bottom of the page.
+    For this purpose TKML provides <b>loader</b> tag.
+</desc>
+
+<info>
+    <section>
+        <b>Loader</b> is loading href content once user scrolls to it.
+        Tag is automatically hidden and replaced with content after loading.
+    </section>
+</info>
+
+<code language="tkml">
+<list>
+    <section>Item 1: Introduction to TKML</section>
+    <section>Item 2: Building Dynamic Interfaces</section>
+    <section>Item 3: Component Architecture</section>
+    <section>Item 4: State Management</section>
+    <loader href="9-loader.tkml?next=5" />
+</list>
+</code>
+<info>
+    <section>
+        Notice that <b>Loader</b> here will be replaced with content its get, so to
+        continue list – server should only respons with list of section tags for this case.
+
+        So server should only respons with list of section tags:
+    </section>
+</info>
+<code language="tkml">
+<list>
+    <section>Item 5: Event Handling</section>
+    <section>Item 6: Data Flow Patterns</section>
+    <section>Item 7: Performance Optimization</section>
+    <section>Item 8: Security Best Practices</section>
+    <loader href="9-loader.tkml?next=9" />
+</list>
+</code>
+
+
+Example:
+<list>
+    <section>Item 1: Introduction to TKML</section>
+    <section>Item 2: Building Dynamic Interfaces</section>
+    <section>Item 3: Component Architecture</section>
+    <section>Item 4: State Management</section>
+    <section>Item 5: Event Handling</section>
+    <section>Item 6: Data Flow Patterns</section>
+    <section>Item 7: Performance Optimization</section>
+    <section>Item 8: Security Best Practices</section>
+    <section>Item 9: Error Handling</section>
+    <section>Item 10: Testing Strategies</section>
+    <section>Item 11: Deployment Workflows</section>
+    <section>Item 12: Version Control</section>
+    <section>Item 13: Documentation Standards</section>
+    <section>Item 14: Code Review Process</section>
+    <section>Item 15: Continuous Integration</section>
+    <section>Item 16: Monitoring Solutions</section>
+    <section>Item 17: Scaling Considerations</section>
+    <section>Item 18: User Experience Design</section>
+    <section>Item 19: Accessibility Guidelines</section>
+    <section>Item 20: Mobile Responsiveness</section>
+    <loader href="./9-loader.tkml?next=21" />
+</list>
+<footer>
+    <navigation>
+        <prev href="8-radio.tkml">Radio</prev>
+        <next href="index.tkml">Home</next>
+    </navigation>
+</footer>
