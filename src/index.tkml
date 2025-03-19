@@ -1,8 +1,9 @@
-<title center>TKML</title>
+<header center>
+    <menu href="/menu.tkml" />TKML
+</header>
 <br /><br />
 <input href='/' placeholder='Enter TKML app URL here' />
 <br /><br />
-<desc center>
-    <a href='examples/index.tkml'>examples</a>
-    <a href='docs/index.tkml'>docs</a>
-</desc>
+<navigation>
+    <page href="docs/index.tkml">Documentation</page>
+</navigation>
