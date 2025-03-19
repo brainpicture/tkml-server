@@ -1,0 +1,75 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Dynamic content
+</header>
+
+<desc>
+    TKML is just a markup language, so it doesn't have any dynamic capabilities by default.
+    The main idea here is to rely on your backend to generate the content dynamically.
+</desc>
+
+<title>Dynamic content</title>
+<desc>
+    Let's say we would like to to create a dynamic page with counter and a button.
+    The button should increment the counter, and the counter should be displayed on the page.
+</desc>
+
+<title>Counter: {{ get.counter | 0 }}</title>
+<button href="6-dynamic.tkml?counter={{(get.counter | 0) + 1}}">Increment</button>
+
+<info>
+    One way to do this is to change the URL of the page when the button is clicked.
+    This way for each change of a page the backend will generate a new TKML page with counter number.
+</info>
+
+<code>
+<title>Counter: 0</title>
+<button href="6-dynamic.tkml?counter=1">Increment</button>
+</code>
+
+<info>
+    <section>
+        Sometimes you might need to change only specifix part of the page touching other parts.
+        For this you can use <b>target</b> attribute of the <b>button</b> tag.
+    </section>
+</info>
+Example:
+<code>
+<title id="counter">Counter: 0</title>
+<button id="button" target="counter,button" href="6-dynamic.tkml?targetCounter=1">Increment only counter</button>
+</code>
+
+<title id="counter">Counter: {{ get.targetCounter | 0 }}</title>
+<button id="button" target="counter,button"
+    href="6-dynamic.tkml?targetCounter={{(get.targetCounter | 0) + 1}}">Increment</button>
+
+<info>
+    <section>
+        In the example above we update just second counter, and the button below.
+
+        To optimise traffic – backend can return only updating elements, skipping all the other
+
+        Sometimes you do not want to change the url of the page, in that case you can use POST params
+        to send data to the backend. <b>href</b> param can be skipped to leave url the same.
+    </section>
+</info>
+Example:
+<code>
+<title id="counter">Counter: 0</title>
+<button id="button" target="counter,button" post="{counter:1}">Increment via POST</button>
+</code>
+<title id="counterPost">Counter: {{post.counter | 0}}</title>
+<button id="buttonPost" target="counterPost,buttonPost" post="counter={{(post.counter | 0) + 1}}">Increment via
+    POST</button>
+<info>
+    <section>
+        This way URL would not update, but any data can be send to the backend.
+    </section>
+</info>
+
+<footer>
+    <navigation>
+        <prev href="5-lists.tkml">Lists & Sections</prev>
+        <next href="index.tkml">Back to Index</next>
+    </navigation>
+</footer>

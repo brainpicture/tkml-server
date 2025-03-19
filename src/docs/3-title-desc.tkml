@@ -1,0 +1,64 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Title & Desc
+</header>
+<desc>
+    TKML also allows you to structure your pages with titles, descriptions and other tags.
+    Lets check how it looks like.
+</desc>
+<code language="tkml">
+<title>This is a Title of a page</title>
+</code>
+<title>This is a Title of a page</title>
+
+<desc>Title supports center param</desc>
+<list>
+    <section>
+        <pill>center</pill> Allows to align title to the center of the page
+    </section>
+</list>
+<code language="tkml">
+    <title center>This is a Title of a page</title>
+    </code>
+<title center>This is a centered Title</title>
+
+<br />
+
+<title>Description Tag</title>
+<desc>
+    The <b>&lt;desc&gt;</b> tag is used to display descriptive text in a muted color. It's perfect for explanations,
+    subtitles, or any secondary content.
+</desc>
+
+<code language="tkml">
+<desc>This is a description text that explains something important.</desc>
+</code>
+
+<desc>This is a description text that explains something important.</desc>
+
+<desc>Description tag also supports the center attribute:</desc>
+
+<code language="tkml">
+<desc center>This is a centered description text.</desc>
+</code>
+
+<desc center>This is a centered description text.</desc>
+
+<br />
+
+<title>Combining Title and Description</title>
+<desc>
+    Title and description tags are often used together to create structured content:
+</desc>
+
+<code language="tkml">
+<title>Main Topic</title>
+<desc>This description provides more details about the main topic.</desc>
+</code>
+
+<footer>
+    <navigation>
+        <prev href="2-button.tkml">Button</prev>
+        <next href="4-links.tkml">Links</next>
+    </navigation>
+</footer>

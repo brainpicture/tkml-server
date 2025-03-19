@@ -1,0 +1,46 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Button
+</header>
+<desc>
+    The only way how it is possible to navigate between pages is by using buttons.
+</desc>
+<code language="tkml">
+<button href="new-page.tkml">My Button</button>
+</code>
+<title>How it looks like</title>
+<button href="2-button.tkml?clicked=true">My Button</button>
+
+<desc>Button component supports valious parameters:</desc>
+<list>
+    <section>
+        <pill>href</pill> URL to navigate to when clicked
+    </section>
+    <section>
+        <pill>target</pill> Target window ('_blank' for new window)
+    </section>
+    <section>
+        <pill>target</pill> Target window ('_blank' for new window)
+    </section>
+    <section>
+        <pill>preload</pill> Set to "true" to preload the href URL
+    </section>
+    <section>
+        <pill>width</pill> Button width in pixels or percentage (e.g. "200" or "100%")
+    </section>
+    <section>
+        <pill>type</pill> Button style: "secondary" for dark background (default: primary)
+    </section>
+    <section>
+        <pill>required</pill> Comma-separated list of required field names to validate before navigation
+    </section>
+
+</list>
+
+
+<footer>
+    <navigation>
+        <prev href="1-hello-world.tkml">Hello world</prev>
+        <next href="3-title-desc.tkml">Title & Description</next>
+    </navigation>
+</footer>

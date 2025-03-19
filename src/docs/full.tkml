@@ -1,0 +1,531 @@
+<title center>TKML (TonKeeper Markup Language)</title>
+
+<desc>
+    TKML isn't just a markup language; it's like your retro '90s game console for web apps! No need for CSS or JS—just
+    plug in your components in XML format and play. We've sprinkled in some '90s vibes and a dash of HTTP/1.1 nostalgia
+    to keep things fun and simple.
+</desc>
+
+<desc>
+    TKML is designed for building fast, mobile-friendly web applications with minimal configuration. Think of it as your
+    trusty sidekick, providing a set of pre-styled components that follow modern design principles, so you can focus on
+    creating awesome content without sweating the small stuff.
+</desc>
+
+<br />
+
+<title>Getting Started</title>
+<desc>
+    You can create the simplest TKML app by uploading an <b>index.tkml</b> page to your website. This page serves as the
+    entry point for your application. Here's a basic example:
+</desc>
+
+<br size="10" />
+
+<title>1. Create an index.tkml file</title>
+<desc>This file will contain your TKML markup. For instance:</desc>
+
+<code lang="xml">
+<title>Hello</title>
+<desc>
+    Hello world! This is a minimal TKML website.
+</desc>
+</code>
+
+<br size="10" />
+
+<title>2. Upload the file to your server</title>
+<desc>Place the index.tkml file in the root directory of your website or any accessible path.</desc>
+
+<br size="10" />
+
+<title>3. Access your TKML app</title>
+<desc>Go to http://tkml.app, and type example.com/index.tkml in input field.</desc>
+
+<br />
+
+<title>Features</title>
+<list>
+    <section>🎨 Pre-styled components with dark/light mode support</section>
+    <section>📱 Mobile-first responsive design</section>
+    <section>🔄 Built-in navigation system with browser history support</section>
+    <section>⚡ Streaming XML parser for fast rendering</section>
+    <section>🎯 Zero CSS/JS configuration needed</section>
+    <section>🔌 Extensible component system</section>
+</list>
+
+<br />
+
+<title>Components</title>
+
+<title>Title</title>
+<desc>Displays a heading.</desc>
+<code lang="xml">
+<title>Regular Title</title>
+<title center>Centered Title</title>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>center</b> - Centers the title text</desc>
+
+<br />
+
+<title>Desc</title>
+<desc>Displays descriptive text in a muted color.</desc>
+<code lang="xml">
+<desc>Description text</desc>
+<desc center>Centered description</desc>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>center</b> - Centers the description text</desc>
+
+<br />
+
+<title>Button</title>
+<desc>Creates a clickable button.</desc>
+<code lang="xml">
+<button href="/action">Primary Button</button>
+<button type="secondary" href="/back">Secondary Button</button>
+<button width="200">Fixed Width Button</button>
+<button width="100%">Full Width Button</button>
+<button required="field1,field2" href="/submit">Submit</button>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>href</b> - URL to navigate to when clicked</desc>
+<desc>- <b>target</b> - Target window ('_blank' for new window)</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the href URL</desc>
+<desc>- <b>width</b> - Button width in pixels or percentage (e.g. "200" or "100%")</desc>
+<desc>- <b>type</b> - Button style: "secondary" for dark background (default: primary)</desc>
+<desc>- <b>required</b> - Comma-separated list of required field names to validate before navigation</desc>
+
+<desc>Example form with required fields:</desc>
+<code lang="xml">
+<input name="to" placeholder="Enter name or address" />
+<label>Message</label>
+<textarea name="message" placeholder="Enter message" rows="10"></textarea>
+<button required="to,message" width="100%" href="./messenger-sent.tkml">Send</button>
+</code>
+
+<br />
+
+<title>Input</title>
+<desc>Creates a text input field.</desc>
+<code lang="xml">
+<input placeholder="Enter text" href="/submit" name="query" />
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>placeholder</b> - Placeholder text</desc>
+<desc>- <b>value</b> - Initial value</desc>
+<desc>- <b>type</b> - Input type (text, password, etc)</desc>
+<desc>- <b>href</b> - URL to submit to on Enter</desc>
+<desc>- <b>name</b> - Parameter name for the submitted value</desc>
+
+<br />
+
+<title>Section</title>
+<desc>Creates a clickable section with optional icon.</desc>
+<code lang="xml">
+<section href="/details" icon="/icons/arrow.png">Section content</section>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>href</b> - URL to navigate to when clicked</desc>
+<desc>- <b>icon</b> - URL of the icon to display</desc>
+<desc>- <b>target</b> - Target window</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the href URL</desc>
+
+<br />
+
+<title>List</title>
+<desc>Groups items in a list container.</desc>
+<code lang="xml">
+<list>
+    <section>Item 1</section>
+    <section>Item 2</section>
+</list>
+</code>
+
+<br />
+
+<title>Info</title>
+<desc>Another type of list container without any separation between items. The info block always tries to layout
+    elements inside to make them look good.</desc>
+<code lang="xml">
+<info>
+    <img src="/image.jpg" height="200" />
+    <title>Title</title>
+    <desc>Description</desc>
+    <button href="/action">Action</button>
+</info>
+</code>
+
+<br />
+
+<title>Checkbox</title>
+<desc>Creates a toggle switch.</desc>
+<code lang="xml">
+<checkbox href="/toggle" checked>Toggle me</checkbox>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>href</b> - URL to call when toggled</desc>
+<desc>- <b>checked</b> - Initial checked state</desc>
+<desc>- <b>target</b> - Target window</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the href URL</desc>
+
+<br />
+
+<title>Radio</title>
+<desc>Creates a radio button in a group.</desc>
+<code lang="xml">
+<radio group="options" href="/select" checked>Option 1</radio>
+<radio group="options" href="/select">Option 2</radio>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>group</b> - Group name for related radio buttons</desc>
+<desc>- <b>href</b> - URL to call when selected</desc>
+<desc>- <b>checked</b> - Initial checked state</desc>
+<desc>- <b>target</b> - Target window</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the href URL</desc>
+
+<br />
+
+<title>Code</title>
+<desc>Displays syntax-highlighted code.</desc>
+<code lang="xml">
+<code lang="javascript">
+const x = 42;
+console.log(x);
+</code>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>lang</b> - Programming language for syntax highlighting</desc>
+
+<br />
+
+<title>Img</title>
+<desc>Displays an image.</desc>
+<code lang="xml">
+<img src="/image.jpg" alt="Description" height="200" />
+<img src="/avatar.jpg" circle /> <!-- Circular image, perfect for avatars -->
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>src</b> - Image URL</desc>
+<desc>- <b>alt</b> - Alternative text</desc>
+<desc>- <b>height</b> - Fixed height in pixels</desc>
+<desc>- <b>circle</b> - Makes the image circular (forces 1:1 aspect ratio)</desc>
+
+<br />
+
+<title>Loader</title>
+<desc>Creates a loading indicator that loads content when visible.</desc>
+<code lang="xml">
+<loader href="/content" />
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>href</b> - URL of content to load when loader becomes visible</desc>
+
+<br />
+
+<title>Links</title>
+<desc>Creates a clickable link.</desc>
+<code lang="xml">
+<a href="/page" preload="true">Click here</a>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>href</b> - URL to navigate to</desc>
+<desc>- <b>target</b> - Target window ('_blank' for new window)</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the href URL</desc>
+
+<br />
+
+<title>Text Formatting</title>
+<desc>Basic text formatting tags:</desc>
+<code lang="xml">
+<b>Bold text</b>
+<i>Italic text</i>
+<u>Underlined text</u>
+<s>Strikethrough text</s>
+</code>
+
+<br />
+
+<title>Line Break</title>
+<desc>Adds vertical spacing:</desc>
+<code lang="xml">
+<br/>           <!-- Default break (20px) -->
+<br size="10"/> <!-- Custom size break -->
+<br size="40"/> <!-- Larger break -->
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>size</b> - Custom break height in pixels (default: 20)</desc>
+
+<desc>All components that support navigation (<b>button</b>, <b>section</b>, <b>a</b>, etc) have these common
+    attributes:</desc>
+<desc>- <b>href</b> - URL to navigate to</desc>
+<desc>- <b>target</b> - Target window ('_blank' for new window)</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the URL</desc>
+
+<br />
+
+<title>Header</title>
+<desc>Creates a sticky header that stays at the top while scrolling.</desc>
+<code lang="xml">
+<header>Regular Header</header>
+<header center>Centered Header</header>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>center</b> - Centers the header text</desc>
+
+<desc>The header component is useful for creating navigation bars or section titles that should remain visible while
+    scrolling through content.</desc>
+
+<br />
+
+<title>Back</title>
+<desc>Creates a back navigation button. When used inside a header, displays as a round button. When used standalone,
+    displays as a regular button with "Back" text.</desc>
+<code lang="xml">
+<header>
+    <back href="/previous" />
+    Page Title
+</header>
+
+<!-- Or as standalone button -->
+<back href="/home" />
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>href</b> - URL to navigate to (defaults to browser's back action if not specified)</desc>
+<desc>- <b>target</b> - Target window ('_blank' for new window)</desc>
+<desc>- <b>preload</b> - Set to "true" to preload the href URL</desc>
+
+<br />
+
+<title>Footer</title>
+<desc>Creates a sticky footer that stays at the bottom. Can automatically hide when scrolling down.</desc>
+<code lang="xml">
+<footer>Regular Footer</footer>
+<footer autohide>Auto-hiding Footer</footer>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>autohide</b> - Makes the footer hide when scrolling down and show when scrolling up</desc>
+
+<desc>The footer component is useful for creating navigation bars or action buttons that should remain accessible while
+    scrolling.</desc>
+
+<br />
+
+<title>Pill</title>
+<desc>Creates a small oval-shaped label. Multiple pills are automatically grouped horizontally.</desc>
+<code lang="xml">
+<pill>Label 1</pill>
+<pill>Label 2</pill>
+<pill>Label 3</pill>
+</code>
+
+<desc>Pills are useful for displaying tags, categories, or status indicators. When multiple pills are used
+    consecutively, they are automatically arranged horizontally with proper spacing.</desc>
+
+<br />
+
+<title>W</title>
+<desc>Makes text white, useful for highlighting text in descriptions.</desc>
+<code lang="xml">
+<desc>Regular text <w>highlighted text</w> regular text</desc>
+</code>
+
+<br />
+
+<title>Bubble</title>
+<desc>Creates a message bubble like in messenger apps.</desc>
+<code lang="xml">
+<bubble type="in">
+    <img src="./john.jpg" circle="true" />
+    <title>John Doe</title>
+    Hello, how are you?
+</bubble>
+<bubble type="out">
+    <img src="./rachiel.jpg" circle="true" />
+    <title>Me</title>
+    I'm fine, thank you!
+</bubble>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>type</b> - Message type: "in" for incoming or "out" for outgoing messages (default: "in")</desc>
+
+<desc>The bubble component automatically handles:</desc>
+<desc>- Avatar image (using <b>img</b> tag)</desc>
+<desc>- Sender name (using <b>title</b> tag)</desc>
+<desc>- Message content (any other content)</desc>
+<desc>- Proper alignment (left for incoming, right for outgoing)</desc>
+<desc>- Message bubble styling with rounded corners</desc>
+
+<br />
+
+<title>Label</title>
+<desc>Creates a form label.</desc>
+<code lang="xml">
+<label>Field Name</label>
+</code>
+
+<br />
+
+<title>Textarea</title>
+<desc>Creates a multi-line text input.</desc>
+<code lang="xml">
+<textarea name="message" placeholder="Enter message" rows="10" />
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>placeholder</b> - Placeholder text</desc>
+<desc>- <b>value</b> - Initial value</desc>
+<desc>- <b>rows</b> - Number of visible text rows</desc>
+<desc>- <b>href</b> - URL to submit to on Ctrl+Enter</desc>
+<desc>- <b>name</b> - Parameter name for the submitted value</desc>
+
+<desc>Example of a form layout:</desc>
+<code lang="xml">
+<label>To</label>
+<input name="to" placeholder="Enter name or address" />
+<label>Message</label>
+<textarea name="message" placeholder="Enter message" rows="10" />
+</code>
+
+<br />
+
+<title>Msg</title>
+<desc>Creates a notification message with different styles.</desc>
+<code lang="xml">
+<msg type="success">Operation completed successfully</msg>
+<msg type="error">Something went wrong</msg>
+<msg type="warning">Please be careful</msg>
+<msg type="info">Just letting you know</msg>
+</code>
+<desc>Attributes:</desc>
+<desc>- <b>type</b> - Message type: "success", "error", "warning", or "info" (default: "info")</desc>
+
+<desc>Example usage:</desc>
+<code lang="xml">
+<msg type="success">Message sent successfully</msg>
+<button width="100%" href="messenger.tkml">Back to messages</button>
+</code>
+
+<br />
+
+<title>Examples</title>
+
+<desc>Complete page example:</desc>
+<code lang="xml">
+<title center>Welcome</title>
+<desc center>Select an option below</desc>
+<list>
+    <section href="/option1" icon="/icons/1.png">First Option</section>
+    <section href="/option2" icon="/icons/2.png">Second Option</section>
+</list>
+<info>
+    <img src="/banner.jpg" height="200" />
+    <title>Important Info</title>
+    <desc>Additional details here</desc>
+    <button href="/more">Learn More</button>
+</info>
+</code>
+
+<br />
+
+<title>Automatic Dark Mode</title>
+
+<code lang="javascript">
+// Automatically detects system preference
+new TKML(container);
+
+// Force dark mode
+new TKML(container, { dark: true });
+</code>
+
+<br />
+
+<title>Navigation with History</title>
+
+<desc>All navigation is handled automatically through <b>href</b> attributes. The library manages browser history and
+    provides smooth transitions between pages.</desc>
+
+<br />
+
+<title>Development</title>
+
+<desc>1. Install dependencies:</desc>
+<code lang="bash">
+npm install
+</code>
+
+<desc>2. Start development server with hot reload:</desc>
+<code lang="bash">
+npm run dev
+</code>
+
+<desc>3. Build for production:</desc>
+<code lang="bash">
+npm run pack
+</code>
+
+<br />
+
+<title>Browser Support</title>
+
+<desc>TKML works in all modern browsers that support:</desc>
+<desc>- XMLHttpRequest</desc>
+<desc>- ES6+ JavaScript</desc>
+<desc>- CSS Custom Properties</desc>
+<desc>- Browser History API</desc>
+
+<br />
+
+<title>License</title>
+
+<desc>MIT</desc>
+
+<br />
+
+<title>Nginx Configuration</title>
+
+<desc>To automatically wrap <b>.tkml</b> files in the HTML template when accessed directly, add this to your Nginx
+    configuration:</desc>
+
+<desc>This configuration:</desc>
+<desc>1. Uses only standard Nginx modules (sub_filter)</desc>
+<desc>2. Automatically wraps TKML content when accessed directly in browser</desc>
+<desc>3. Serves raw TKML when requested with proper headers</desc>
+<desc>4. No additional modules required</desc>
+
+<desc>The solution works by wrapping the response content in HTML template using <b>sub_filter</b> directives to add
+    content before and after the TKML file content.</desc>
+
+<br />
+
+<title>Standard HTML Tags</title>
+<desc>TKML supports several standard HTML tags for text formatting:</desc>
+
+<code lang="xml">
+<b>Bold text</b>
+<i>Italic text</i>
+<u>Underlined text</u>
+<s>Strikethrough text</s>
+</code>
+
+<desc>These tags work exactly like their HTML counterparts and can be used within any text content. For example:</desc>
+
+<code lang="xml">
+<desc>
+    This is <b>bold</b> and this is <i>italic</i>.
+    You can also <u>underline</u> or <s>strike through</s> text.
+    These tags can be <b><i>combined</i></b> as needed.
+</desc>
+
+<section>
+    Regular text with <b>bold emphasis</b>
+</section>
+
+<title>
+    Title with <i>italic part</i>
+</title>
+</code>
+
+<desc>The tags maintain consistent styling with the rest of your TKML content while providing familiar HTML text
+    formatting options.</desc>
+</code>

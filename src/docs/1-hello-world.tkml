@@ -1,0 +1,30 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Hello world
+</header>
+<desc>
+    This is the first example showing how the simplest TKML page looks like.
+</desc>
+<code language="tkml">
+Hello <b>World</b>
+</code>
+<desc>Here is how such content would look like:</desc>
+<info>
+    <p>Hello <b>World</b></p>
+</info>
+<info>
+    <p>
+        TKML is like XML but operates at a higher level than HTML.Instead of working with basic HTML elements,
+        TKML provides ready-to-use components that make it easy to build polished applications.
+        <br /><br />
+        While HTML requires you to style and structure basic elements, TKML components come pre-styled and
+        pre-configured with common functionality built-in. This allows you to focus on building your application
+        rather than implementing common UI patterns from scratch.
+    </p>
+</info>
+
+<footer>
+    <navigation>
+        <next href="2-button.tkml">Button</next>
+    </navigation>
+</footer>

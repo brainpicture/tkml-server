@@ -1,0 +1,140 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Lists & Sections
+</header>
+
+<desc>
+    TKML provides powerful components for organizing content into lists and sections. These components help create
+    structured, scannable interfaces.
+</desc>
+
+<title>List Component</title>
+<desc>
+    The <b>&lt;list&gt;</b> tag creates a container for grouping items with clear separation between them.
+</desc>
+
+<code language="tkml">
+<list>
+    <section>First item</section>
+    <section>Second item</section>
+    <section>Third item</section>
+</list>
+</code>
+
+<desc>Here's how it looks:</desc>
+<list>
+    <section>First item</section>
+    <section>Second item</section>
+    <section>Third item</section>
+</list>
+
+<br />
+
+<title>Section Component</title>
+<desc>
+    The <b>&lt;section&gt;</b> tag creates a clickable item, typically used within lists. It can include an optional
+    icon and navigation link.
+</desc>
+
+<code language="tkml">
+<section href="details.tkml">Basic section</section>
+</code>
+
+<desc>With an icon:</desc>
+
+<code language="tkml">
+<section href="details.tkml" icon="/icons/arrow.png">Section with icon</section>
+</code>
+
+<desc>Section attributes:</desc>
+<list>
+    <section>
+        <pill>href</pill> URL to navigate to when clicked
+    </section>
+    <section>
+        <pill>icon</pill> URL of the icon to display
+    </section>
+    <section>
+        <pill>target</pill> Target window ('_blank' for new window)
+    </section>
+    <section>
+        <pill>preload</pill> Set to "true" to preload the href URL
+    </section>
+</list>
+
+<br />
+
+<title>Interactive List Example</title>
+<desc>
+    Here's an example of an interactive list with clickable sections:
+</desc>
+
+<code language="tkml">
+<list>
+    <section href="profile.tkml" icon="/icons/user.png">Profile</section>
+    <section href="settings.tkml" icon="/icons/gear.png">Settings</section>
+    <section href="help.tkml" icon="/icons/question.png">Help</section>
+</list>
+</code>
+
+<desc>This creates a menu-like interface where each item navigates to a different page.</desc>
+
+<br />
+
+<title>Info Component</title>
+<desc>
+    The <b>&lt;info&gt;</b> tag creates a container similar to list, but without separation between items. It's perfect
+    for grouping related content in a cohesive block.
+</desc>
+
+<code language="tkml">
+<info>
+    <img src="/image.jpg" height="200" />
+    <title>Product Name</title>
+    <desc>Product description goes here</desc>
+    <button href="/buy.tkml">Buy Now</button>
+</info>
+</code>
+
+<desc>Here's a simple example:</desc>
+
+<info>
+    <title>Feature Highlight</title>
+    <desc>This is how the info component displays content in a cohesive block without separators.</desc>
+    <button href="5-lists.tkml?clicked=true">Action Button</button>
+</info>
+
+<br />
+
+<title>Combining Components</title>
+<desc>
+    You can combine these components to create complex layouts:
+</desc>
+
+<code language="tkml">
+<title>Categories</title>
+<list>
+    <section href="category1.tkml">Category 1</section>
+    <section href="category2.tkml">Category 2</section>
+</list>
+
+<title>Featured Item</title>
+<info>
+    <img src="/featured.jpg" height="150" />
+    <title>Featured Product</title>
+    <desc>Special offer available now!</desc>
+    <button href="/featured.tkml">View Details</button>
+</info>
+</code>
+
+<desc>
+    This pattern is commonly used in e-commerce and content-heavy applications to organize information in a
+    user-friendly way.
+</desc>
+
+<footer>
+    <navigation>
+        <prev href="4-links.tkml">Links</prev>
+        <next href="6-dynamic.tkml">Dynamic content</next>
+    </navigation>
+</footer>

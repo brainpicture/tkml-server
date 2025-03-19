@@ -1,0 +1,141 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Links
+</header>
+
+<desc>
+    TKML provides several ways to create links between pages. Understanding how navigation works is essential for
+    building interactive applications.
+</desc>
+
+<title>Basic Links</title>
+<desc>
+    The simplest way to create a link is using the <b>&lt;a&gt;</b> tag:
+</desc>
+
+<code language="tkml">
+<a href="another-page.tkml">Click here to navigate</a>
+</code>
+
+<desc>Here's how it looks:</desc>
+<a href="4-links.tkml?clicked=true">Click here to navigate</a>
+
+<br />
+
+<title>Link Attributes</title>
+<list>
+    <section>
+        <pill>href</pill> URL to navigate to when clicked
+    </section>
+    <section>
+        <pill>target</pill> Target window ('_blank' for new window)
+    </section>
+    <section>
+        <pill>preload</pill> Set to "true" to preload the href URL
+    </section>
+</list>
+
+<br />
+
+<title>Navigation Mechanics</title>
+<desc>
+    When a user clicks on a link or button with an <b>href</b> attribute, TKML handles the navigation process:
+</desc>
+
+<list>
+    <section>
+        <b>1.</b> TKML intercepts the click event
+    </section>
+    <section>
+        <b>2.</b> It fetches the content from the specified URL
+    </section>
+    <section>
+        <b>3.</b> The new content replaces the current page content
+    </section>
+    <section>
+        <b>4.</b> Browser history is updated to support back/forward navigation
+    </section>
+</list>
+
+<br />
+
+<title>Navigation Components</title>
+<desc>
+    Several TKML components support navigation through the <b>href</b> attribute:
+</desc>
+
+<list>
+    <section>
+        <pill>&lt;a&gt;</pill> Standard hyperlink
+    </section>
+    <section>
+        <pill>&lt;button&gt;</pill> Button that navigates when clicked
+    </section>
+    <section>
+        <pill>&lt;section&gt;</pill> List item that navigates when clicked
+    </section>
+    <section>
+        <pill>&lt;back&gt;</pill> Back navigation button
+    </section>
+</list>
+
+<br />
+
+<title>Preloading Content</title>
+<desc>
+    To improve perceived performance, you can preload content before the user clicks:
+</desc>
+
+<code language="tkml">
+<a href="heavy-page.tkml" preload="true">This content will start loading on hover</a>
+</code>
+
+<br />
+
+<title>URL Parameters</title>
+<desc>
+    You can pass parameters in URLs to create dynamic content:
+</desc>
+
+<code language="tkml">
+<button href="product.tkml?id=123&color=blue">View Blue Product</button>
+</code>
+
+<desc>
+    In your TKML application, you can access these parameters to customize the content based on the values provided.
+</desc>
+
+<br />
+
+<title>External Links</title>
+<desc>
+    To link to external websites, use the <b>target</b> attribute:
+</desc>
+
+<code language="tkml">
+<a href="https://example.com" target="_blank">Visit External Site</a>
+</code>
+
+<desc>
+    This will open the link in a new browser tab or window.
+</desc>
+
+<br />
+
+<title>Navigation History</title>
+<desc>
+    TKML automatically manages browser history, allowing users to use the browser's back and forward buttons to navigate
+    between pages in your application.
+</desc>
+
+<desc>
+    When a user clicks a link, TKML updates the browser's URL and history state without requiring a full page reload,
+    creating a smooth single-page application experience.
+</desc>
+
+<footer>
+    <navigation>
+        <prev href="3-title-desc.tkml">Title & Desc</prev>
+        <next href="5-lists.tkml">Lists & Sections</next>
+    </navigation>
+</footer>
