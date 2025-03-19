@@ -6,4 +6,7 @@
     <section href="/docs/4-links.tkml">Links</section>
     <section href="/docs/5-lists.tkml">Lists & Sections</section>
     <section href="/docs/6-dynamic.tkml">Dynamic content</section>
+    <section href="/docs/7-checkboxes.tkml">Checkboxes</section>
+    <section href="/docs/8-radio.tkml">Radio Buttons</section>
+    <section href="/docs/9-loader.tkml">Loader</section>
 </list>

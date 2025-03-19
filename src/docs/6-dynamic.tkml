@@ -70,6 +70,6 @@ Example:
 <footer>
     <navigation>
         <prev href="5-lists.tkml">Lists & Sections</prev>
-        <next href="index.tkml">Back to Index</next>
+        <next href="7-checkboxes.tkml">Checkboxes</next>
     </navigation>
 </footer>

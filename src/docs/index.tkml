@@ -7,4 +7,4 @@
     and finished looking apps.
 </desc>
 
-{{include("menu.tkml")}}
+{{include("../menu.tkml")}}

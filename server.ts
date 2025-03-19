@@ -1,161 +1,103 @@
 const PORT = 8348;
 const ROOT_DIR = './src'; // Root directory with TKML files
-const VERSION = '19';
+const VERSION = '20';
 
 // Import TKML from local file
 import { TKML } from './tkml.server.js';
+const TKMLinstance = new TKML();
 
-const HTML_WRAPPER = `<!DOCTYPE html>
+// HTML wrapper for TKML content
+const HTML_WRAPPER = `
+<!DOCTYPE html>
 <html>
 <head>
-    <title>TKML App</title>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflAx4QGA4EvmzDAAAA30lEQVRIx2NgGAWMCKa8JKM4A8Ovt88ekyLCDGOoyDBJMjExMbFy8zF8/EKsCAMDE8yAPyIwFps48SJIBpAL4AZwvoSx/r0lXgQpDN58EWL5x/7/H+vL20+JFxluQKVe5b3Ke5V+0kQQCamfoYKBg4GDwUKI8d0BYkWQkrLKewYBKPPDHUFiRaiZkBgmwhj/F5IgggyUJ6i8V3mv0kCayDAAeEsklXqGAgYGhgV3CnGrwVciYSYk0kokhgS44/JxqqFpiYSZbEgskd4dEBRk1GD4wdB5twKXmlHAwMDAAACdEZau06NQUwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMC0wNy0xNVQxNTo1Mzo0MCswMDowMCVXsDIAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjAtMDctMTVUMTU6NTM6NDArMDA6MDBUCgiOAAAAAElFTkSuQmCC">
-    <link rel="stylesheet" href="https://tkml.app/styles.min.css?${VERSION}">
-    <script src="https://tkml.app/tkml.min.js?${VERSION}"></script>
+    <title>TKML App</title>
+    <link rel="stylesheet" href="/styles.min.css">
+    <style>
+        body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    </style>
 </head>
 <body>
-    <div id="container" class="tkml-cont">{{content}}</div>
-    <script>
-        const tkml = new TKML(document.getElementById('container'), { dark: true, URLControl: true, instanceId: {{instanceId}} });
-        {{js}}
-    </script>
+    <div id="app" data-instance-id="{{instanceId}}">{{content}}</div>
+    <script src="/tkml.min.js"></script>
+    <script>{{js}}</script>
 </body>
-</html>`;
+</html>
+`;
 
-// Create TKML instance for server-side rendering
-const TKMLinstance = new TKML(null, { isServer: true });
-
-// Cache for imported files to avoid repeated reading
+// Cache for imported files (raw content only)
 const importCache = new Map<string, string>();
 
-// Set to track files currently being processed to prevent circular includes
-const processingFiles = new Set<string>();
+/**
+ * Class to handle a single TKML request
+ */
+class TKMLRequest {
+    private readonly req: Request;
+    private readonly url: URL;
+    private readonly path: string;
+    private readonly getParams: Record<string, string>;
+    private readonly postParams: Record<string, string>;
+    private readonly processingFiles: Set<string> = new Set();
+    private finished: boolean = false;
 
-// Function to include file content
-async function includeFile(
-    filePath: string,
-    getParams: Record<string, string> = {},
-    postParams: Record<string, string> = {}
-): Promise<string> {
-    // Check cache
-    if (importCache.has(filePath)) {
-        return importCache.get(filePath)!;
+
+    constructor(req: Request) {
+        this.req = req;
+        this.url = new URL(req.url);
+        this.path = this.normalizePath(this.url.pathname);
+        this.getParams = Object.fromEntries(this.url.searchParams.entries());
+        this.postParams = {};
     }
 
-    // Check for circular includes
-    if (processingFiles.has(filePath)) {
-        console.error(`Circular include detected: ${filePath}`);
-        return `[Error: Circular include detected: ${filePath}]`;
-    }
+    /**
+     * Normalize the path by removing leading slash and handling directories
+     */
+    private normalizePath(path: string): string {
+        // Remove leading slash
+        path = path.replace(/^\//, '');
 
-    // Mark file as being processed
-    processingFiles.add(filePath);
-
-    // Form full path to file
-    const fullPath = `${ROOT_DIR}/${filePath}`;
-
-    try {
-        const file = Bun.file(fullPath);
-        const exists = await file.exists();
-
-        if (!exists) {
-            processingFiles.delete(filePath);
-            console.error(`Import file not found: ${fullPath}`);
-            return `[Error: Import file not found: ${filePath}]`;
+        // Check if the path is a TKML file
+        if (!path.endsWith('.tkml')) {
+            // If not, assume it's a directory and add index.tkml
+            path = path.replace(/\/?$/, '/index.tkml');
         }
 
-        // Read file content
-        let content = await file.text();
-
-        // Process JavaScript expressions in the included file
-        content = await processJsExpressions(content, getParams, postParams);
-
-        // Cache the processed result
-        importCache.set(filePath, content);
-
-        // Mark file as no longer being processed
-        processingFiles.delete(filePath);
-
-        return content;
-    } catch (error) {
-        // Make sure to remove from processing set in case of error
-        processingFiles.delete(filePath);
-        console.error(`Error importing file ${filePath}:`, error);
-        return `[Error importing ${filePath}: ${error.message}]`;
+        return path;
     }
-}
 
-// Function to execute JavaScript code inside double curly braces
-async function processJsExpressions(
-    content: string,
-    getParams: Record<string, string> = {},
-    postParams: Record<string, string> = {}
-): Promise<string> {
-    // Regular expression to find expressions like {{...}}
-    const jsExpressionRegex = /\{\{([\s\S]*?)\}\}/g;
-
-    // Find all matches
-    const matches = Array.from(content.matchAll(jsExpressionRegex));
-
-    // Process each match sequentially
-    for (const match of matches) {
-        const fullMatch = match[0];
-        const jsCode = match[1];
+    /**
+     * Parse POST parameters from the request
+     */
+    async parsePostParams(): Promise<void> {
+        if (this.req.method !== 'POST') return;
 
         try {
-            // Create a safe context for code execution with import function and parameters
-            const sandbox = {
-                Date,
-                Math,
-                JSON,
-                Array,
-                Object,
-                String,
-                Number,
-                Boolean,
-                console: {
-                    log: (...args: any[]) => console.log(...args),
-                    error: (...args: any[]) => console.error(...args),
-                    warn: (...args: any[]) => console.warn(...args),
-                    info: (...args: any[]) => console.info(...args)
-                },
-                include: async (path: string) => await includeFile(path, getParams, postParams),
-                get: getParams,
-                post: postParams
-            };
+            const contentType = this.req.headers.get('Content-Type') || '';
 
-            // Create an async function to execute the code
-            const asyncFunction = new Function('sandbox', `
-                return (async function() {
-                    with(sandbox) {
-                        return ${jsCode};
-                    }
-                })();
-            `);
-
-            // Execute the code and get the result
-            const result = await asyncFunction(sandbox);
-
-            // Replace the expression with the execution result
-            content = content.replace(fullMatch, String(result));
+            if (contentType.includes('application/json')) {
+                // Handle JSON data
+                const jsonData = await this.req.json();
+                Object.assign(this.postParams, jsonData);
+            } else if (contentType.includes('application/x-www-form-urlencoded') ||
+                contentType.includes('multipart/form-data')) {
+                // Handle form data
+                const formData = await this.req.formData();
+                // Use type assertion to access entries method
+                Object.assign(this.postParams, Object.fromEntries((formData as any).entries()));
+            }
         } catch (error) {
-            console.error(`Error executing JS expression: ${jsCode}`, error);
-            content = content.replace(fullMatch, `[Error: ${error.message}]`);
+            console.error('Error parsing POST data:', error);
         }
     }
 
-    return content;
-}
+    /**
+     * Handle CORS preflight requests
+     */
+    handleCorsPreflightRequest(): Response | null {
+        if (this.req.method !== 'OPTIONS') return null;
 
-async function handleTkmlRequest(req: Request): Promise<Response> {
-    console.log('URL', req.url);
-    const url = new URL(req.url);
-    let path = url.pathname;
-
-    // Handle CORS preflight requests
-    if (req.method === 'OPTIONS') {
         return new Response(null, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -166,152 +108,421 @@ async function handleTkmlRequest(req: Request): Promise<Response> {
         });
     }
 
-    // Parse GET parameters
-    const getParams = Object.fromEntries(url.searchParams.entries());
+    /**
+     * Handle requests to static files
+     */
+    handleStaticFileRequest(): Promise<Response> | null {
+        const path = this.url.pathname;
 
-    // Parse POST parameters if method is POST
-    let postParams: Record<string, string> = {};
-    if (req.method === 'POST') {
+        if (path === '/tkml.min.js') {
+            return this.serveStaticFile('./tkml.min.js', 'application/javascript');
+        } else if (path === '/styles.min.css') {
+            return this.serveStaticFile('./styles.min.css', 'text/css');
+        }
+
+        return null;
+    }
+
+    /**
+     * Serve a static file
+     */
+    async serveStaticFile(filePath: string, contentType: string): Promise<Response> {
         try {
-            const contentType = req.headers.get('Content-Type') || '';
+            const file = Bun.file(filePath);
+            const exists = await file.exists();
 
-            if (contentType.includes('application/json')) {
-                // Handle JSON data
-                const jsonData = await req.json();
-                postParams = jsonData;
-            } else if (contentType.includes('application/x-www-form-urlencoded') ||
-                contentType.includes('multipart/form-data')) {
-                // Handle form data
-                const formData = await req.formData();
-                // Use type assertion to access entries method
-                postParams = Object.fromEntries((formData as any).entries());
+            if (!exists) {
+                return new Response(`File not found: ${filePath}`, {
+                    status: 404,
+                    headers: { 'Content-Type': 'text/plain' }
+                });
+            }
+
+            return new Response(file, {
+                headers: {
+                    'Content-Type': contentType,
+                    'Cache-Control': 'max-age=3600'
+                }
+            });
+        } catch (error) {
+            console.error(`Error serving ${filePath}:`, error);
+            return new Response('Server Error', { status: 500 });
+        }
+    }
+
+    /**
+     * Include file content
+     */
+    async includeFile(filePath: string, currentFilePath: string = ''): Promise<string> {
+        // Resolve the path relative to the current file
+        let resolvedPath = filePath;
+
+        // If the path is relative and we have a current file path
+        if (!filePath.startsWith('/') && currentFilePath) {
+            // Get the directory of the current file
+            const currentDir = currentFilePath.split('/').slice(0, -1).join('/');
+            // Resolve the path relative to the current directory
+            resolvedPath = currentDir ? `${currentDir}/${filePath}` : filePath;
+        }
+
+        // Form full path to file
+        const fullPath = `${ROOT_DIR}/${resolvedPath}`;
+
+        try {
+            // Check if file exists
+            let fileContent;
+
+            // Only use cache for raw file content, not processed results
+            if (importCache.has(resolvedPath)) {
+                fileContent = importCache.get(resolvedPath)!;
+            } else {
+                const file = Bun.file(fullPath);
+                const exists = await file.exists();
+
+                if (!exists) {
+                    console.error(`Import file not found: ${fullPath}`);
+                    return `[Error: Import file not found: ${resolvedPath}]`;
+                }
+
+                // Read file content
+                fileContent = await file.text();
+
+                // Cache the raw file content
+                importCache.set(resolvedPath, fileContent);
+            }
+
+            // Check for circular includes
+            if (this.processingFiles.has(resolvedPath)) {
+                console.error(`Circular include detected: ${resolvedPath}`);
+                return `[Error: Circular include detected: ${resolvedPath}]`;
+            }
+
+            // Mark file as being processed
+            this.processingFiles.add(resolvedPath);
+
+            let processedContent;
+
+            // Check if it's a JavaScript/TypeScript file
+            if (resolvedPath.endsWith('.js') || resolvedPath.endsWith('.ts')) {
+                try {
+                    // Create a context for the script
+                    const context = {
+                        // Convert string values to appropriate types when possible
+                        get: Object.fromEntries(
+                            Object.entries(this.getParams).map(([key, value]) => {
+                                // Try to convert numeric strings to numbers
+                                if (/^\d+$/.test(value)) {
+                                    return [key, parseInt(value, 10)];
+                                }
+                                return [key, value];
+                            })
+                        ),
+                        post: this.postParams,
+                        result: '',
+                        finished: false,
+                        exports: {},
+
+                        // Function to finish execution and return content
+                        finish(content: string) {
+                            this.result = content;
+                            this.finished = true;
+                            // Throw a special error to stop execution
+                            throw new Error("__TKML_FINISH__");
+                        },
+
+                        // Function to export variables
+                        export(name: string, value: any) {
+                            this.exports[name] = value;
+                        }
+                    };
+
+                    // Wrap the script in a function that provides the context
+                    const scriptFunction = new Function('context', `
+                        try {
+                            with(context) {
+                                ${fileContent}
+                                return { result, finished, exports };
+                            }
+                        } catch(e) {
+                            // Check if this is our special finish signal
+                            if (e.message === "__TKML_FINISH__") {
+                                return { result: context.result, finished: true, exports: context.exports };
+                            }
+                            // Otherwise rethrow
+                            throw e;
+                        }
+                    `);
+
+                    // Execute the script
+                    const result = scriptFunction(context);
+
+                    // If finish() was called, use that result
+                    if (result.finished) {
+                        processedContent = result.result;
+                        this.finished = true;
+                    } else if (Object.keys(result.exports).length > 0) {
+                        // If there are exports, make them available in the sandbox
+                        processedContent = `
+                            <!-- JS Module Exports -->
+                            <script type="application/x-tkml-exports">
+                                ${JSON.stringify(result.exports)}
+                            </script>
+                        `;
+                    } else {
+                        // No result or exports
+                        processedContent = '';
+                    }
+                } catch (error) {
+                    // Only log errors that aren't our special finish signal
+                    if (error.message !== "__TKML_FINISH__") {
+                        console.error(`Error executing JS/TS module ${resolvedPath}:`, error);
+                        processedContent = `[Error executing ${resolvedPath}: ${error.message}]`;
+                    }
+                }
+            } else {
+                // Process JavaScript expressions in the included file
+                // Pass the resolved path as the current file path for nested includes
+                processedContent = await this.processJsExpressions(fileContent, resolvedPath);
+            }
+
+            // Mark file as no longer being processed
+            this.processingFiles.delete(resolvedPath);
+
+            return processedContent;
+        } catch (error) {
+            // Make sure to remove from processing set in case of error
+            this.processingFiles.delete(resolvedPath);
+            console.error(`Error importing file ${resolvedPath}:`, error);
+            return `[Error importing ${resolvedPath}: ${error.message}]`;
+        }
+    }
+
+    /**
+     * Process JavaScript expressions in double curly braces
+     */
+    async processJsExpressions(content: string, currentFilePath: string = ''): Promise<string> {
+        // First, extract any exports from included JS/TS files
+        const exportsRegex = /<script type="application\/x-tkml-exports">([\s\S]*?)<\/script>/g;
+        let match;
+
+        // Collect all exports
+        let allExports = {};
+        while ((match = exportsRegex.exec(content)) !== null) {
+            try {
+                const exports = JSON.parse(match[1]);
+                allExports = { ...allExports, ...exports };
+            } catch (error) {
+                console.error('Error parsing exports:', error);
+            }
+        }
+
+        // Remove all export script tags
+        content = content.replace(exportsRegex, '');
+
+        // Regular expression for finding expressions like {{...}}
+        const jsExpressionRegex = /\{\{([\s\S]*?)\}\}/;
+
+        // Process expressions sequentially
+        let processedContent = content;
+        let expressionMatch;
+
+        // Keep processing while there are matches
+        while ((expressionMatch = jsExpressionRegex.exec(processedContent)) !== null) {
+            const fullMatch = expressionMatch[0];
+            const jsCode = expressionMatch[1];
+            const matchIndex = expressionMatch.index;
+
+            try {
+                // Create a safe context for code execution
+                const sandbox = {
+                    Date,
+                    Math,
+                    JSON,
+                    Array,
+                    Object,
+                    String,
+                    Number,
+                    Boolean,
+                    console: {
+                        log: (...args: any[]) => console.log(...args),
+                        error: (...args: any[]) => console.error(...args),
+                        warn: (...args: any[]) => console.warn(...args),
+                        info: (...args: any[]) => console.info(...args)
+                    },
+                    // Pass the current file path to includeFile and return the result
+                    include: async (path: string) => {
+                        return await this.includeFile(path, currentFilePath);
+                    },
+                    get: this.getParams,
+                    post: this.postParams,
+                    // Add all exports from included JS/TS files
+                    ...allExports
+                };
+
+                // Create an async function to execute the code
+                const asyncFunction = new Function('sandbox', `
+                    return (async function() {
+                        with(sandbox) {
+                            return ${jsCode};
+                        }
+                    })();
+                `);
+
+                // Execute the code and get the result
+                const result = await asyncFunction(sandbox);
+
+                // Check if we need to stop processing due to finish() being called
+                if (this.finished) {
+                    return String(result);
+                }
+
+                // Replace just this expression with its result
+                const resultStr = String(result);
+                processedContent =
+                    processedContent.substring(0, matchIndex) +
+                    resultStr +
+                    processedContent.substring(matchIndex + fullMatch.length);
+
+                // Reset regex to start from the position after the replacement
+                // This is important to avoid infinite loops with empty results
+                jsExpressionRegex.lastIndex = matchIndex + resultStr.length;
+            } catch (error) {
+                console.error(`Error executing JS expression: ${jsCode}`, error);
+
+                // Replace with error message
+                const errorMsg = `[Error: ${error.message}]`;
+                processedContent =
+                    processedContent.substring(0, matchIndex) +
+                    errorMsg +
+                    processedContent.substring(matchIndex + fullMatch.length);
+
+                // Reset regex to start from the position after the replacement
+                jsExpressionRegex.lastIndex = matchIndex + errorMsg.length;
+            }
+        }
+
+        return processedContent;
+    }
+
+    /**
+     * Create a TKML response
+     */
+    createTkmlResponse(content: string): Response {
+        const headers = new Headers({
+            'Content-Type': 'application/tkml',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Accept',
+            'Cache-Control': 'no-cache'
+        });
+
+        return new Response(content, { headers });
+    }
+
+    /**
+     * Create an HTML response
+     */
+    createHtmlResponse(content: string): Response {
+        const html = HTML_WRAPPER.replace('{{content}}', content);
+        const headers = new Headers({
+            'Content-Type': 'text/html',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Accept',
+            'Cache-Control': 'no-cache'
+        });
+
+        return new Response(html, { headers });
+    }
+
+    /**
+     * Create an SSR response
+     */
+    createSSRResponse(content: string, js: string, instanceId: string): Response {
+        const html = HTML_WRAPPER
+            .replace('{{content}}', content)
+            .replace('{{js}}', js)
+            .replace('{{instanceId}}', instanceId);
+
+        const headers = new Headers({
+            'Content-Type': 'text/html',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Accept',
+            'Cache-Control': 'no-cache'
+        });
+
+        return new Response(html, { headers });
+    }
+
+    /**
+     * Handle the TKML request
+     */
+    async handle(): Promise<Response> {
+        console.log('URL', this.req.url);
+
+        // Handle CORS preflight requests
+        const corsResponse = this.handleCorsPreflightRequest();
+        if (corsResponse) return corsResponse;
+
+        // Parse POST parameters
+        await this.parsePostParams();
+
+        // Handle requests to static files
+        const staticResponse = this.handleStaticFileRequest();
+        if (staticResponse) return staticResponse;
+
+        // Form full path to file
+        const filePath = `${ROOT_DIR}/${this.path}`;
+        console.log('filePath:', filePath);
+
+        try {
+            // Check if file exists
+            const file = Bun.file(filePath);
+            const exists = await file.exists();
+
+            if (!exists) {
+                return new Response(`TKML file not found: ${this.path}`, {
+                    status: 404,
+                    headers: { 'Content-Type': 'text/plain' }
+                });
+            }
+
+            // Read file content
+            let content = await file.text();
+
+            // Process JavaScript expressions in double curly braces
+            content = await this.processJsExpressions(content, this.path);
+
+            // Check Accept header
+            const acceptHeader = this.req.headers.get('Accept') || '';
+            if (acceptHeader.includes('application/tkml')) {
+                return this.createTkmlResponse(content);
+            } else {
+                let html = TKMLinstance.compile(content);
+                let js = TKMLinstance.getRuntimeJS();
+
+                return this.createSSRResponse(html, js, TKMLinstance.runtime.getId());
             }
         } catch (error) {
-            console.error('Error parsing POST data:', error);
+            console.error('Error:', error);
+            return new Response('Server Error', { status: 500 });
         }
     }
-
-    // Handle requests to static files
-    if (path === '/tkml.min.js') {
-        return serveStaticFile('./tkml.min.js', 'application/javascript');
-    } else if (path === '/styles.min.css') {
-        return serveStaticFile('./styles.min.css', 'text/css');
-    }
-
-    // Remove leading slash
-    path = path.replace(/^\//, '');
-
-    // Check if the path is a TKML file
-    if (!path.endsWith('.tkml')) {
-        // If not, assume it's a directory and add index.tkml
-        path = path.replace(/\/?$/, '/index.tkml');
-    }
-
-    // Form full path to file
-    const filePath = `${ROOT_DIR}/${path}`;
-
-    console.log('filePath:', filePath);
-
-    try {
-        // Check if file exists
-        const file = Bun.file(filePath);
-        const exists = await file.exists();
-
-        if (!exists) {
-            return new Response(`TKML file not found: ${path}`, {
-                status: 404,
-                headers: { 'Content-Type': 'text/plain' }
-            });
-        }
-
-        // Read file content
-        let content = await file.text();
-
-        // Process JavaScript expressions in double curly braces with GET and POST parameters
-        content = await processJsExpressions(content, getParams, postParams);
-
-        // Check Accept header
-        const acceptHeader = req.headers.get('Accept') || '';
-        if (acceptHeader.includes('application/tkml')) {
-            return createTkmlResponse(content);
-        } else {
-            let html = TKMLinstance.compile(content);
-            let js = TKMLinstance.getRuntimeJS();
-
-            return createSSRResponse(html, js, TKMLinstance.runtime.getId());
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        return new Response('Server Error', { status: 500 });
-    }
 }
 
-// Function to serve static files
-async function serveStaticFile(filePath: string, contentType: string): Promise<Response> {
-    try {
-        const file = Bun.file(filePath);
-        const exists = await file.exists();
-
-        if (!exists) {
-            return new Response(`File not found: ${filePath}`, {
-                status: 404,
-                headers: { 'Content-Type': 'text/plain' }
-            });
-        }
-
-        return new Response(file, {
-            headers: {
-                'Content-Type': contentType,
-                'Cache-Control': 'max-age=3600'
-            }
-        });
-    } catch (error) {
-        console.error(`Error serving ${filePath}:`, error);
-        return new Response('Server Error', { status: 500 });
-    }
+/**
+ * Main request handler
+ */
+async function handleRequest(req: Request): Promise<Response> {
+    const handler = new TKMLRequest(req);
+    return await handler.handle();
 }
 
-function createTkmlResponse(content: string): Response {
-    const headers = new Headers({
-        'Content-Type': 'application/tkml',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Accept',
-        'Cache-Control': 'no-cache'
-    });
-
-    return new Response(content, { headers });
-}
-
-function createHtmlResponse(content: string): Response {
-    const html = HTML_WRAPPER.replace('{{content}}', content);
-    const headers = new Headers({
-        'Content-Type': 'text/html',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Accept',
-        'Cache-Control': 'no-cache'
-    });
-
-    return new Response(html, { headers });
-}
-
-function createSSRResponse(content: string, js: string, instanceId: string): Response {
-    const html = HTML_WRAPPER.replace('{{content}}', content).replace('{{js}}', js).replace('{{instanceId}}', instanceId);
-    const headers = new Headers({
-        'Content-Type': 'text/html',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Accept',
-        'Cache-Control': 'no-cache'
-    });
-
-    return new Response(html, { headers });
-}
-
+// Start the server
 const server = Bun.serve({
     port: PORT,
-    fetch: handleTkmlRequest
+    fetch: handleRequest
 });
 
-console.log(`TKML server running at http://localhost:${server.port}`); 
+console.log(`TKML server running at http://localhost:${server.port} (v${VERSION})`); 
