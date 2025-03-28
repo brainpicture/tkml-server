@@ -1,0 +1,24 @@
+<?include("data.ts")?>
+
+<header>Welcome,
+    <?userName?>
+</header>
+
+<desc>Today is
+    <?formattedDate?>
+</desc>
+
+<list>
+    <?items.map(item => `<section>${item}</section>`).join('')?>
+</list>
+
+<desc>Total items:
+    <?count?>
+</desc>
+<desc>Price:
+    <?formatPrice(29.99)?>
+</desc>
+<desc>Version:
+    <?appInfo.version?> by
+    <?appInfo.author?>
+</desc>

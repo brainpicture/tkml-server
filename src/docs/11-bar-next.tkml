@@ -1,0 +1,176 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Tab Bar
+</header>
+
+<desc>
+    The Tab Bar component provides a simple way to create navigation tabs or segmented controls.
+    Use the <b>bar</b> tag with <b>tab</b> elements to create an intuitive tabbed interface.
+</desc>
+
+<info>
+    <section>
+        The basic tab bar consists of a <b>bar</b> tag containing multiple <b>tab</b> elements.
+        Each tab represents a selectable option in the bar.
+    </section>
+</info>
+
+<bar>
+    <tab>Home</tab>
+    <tab>Settings</tab>
+    <tab>Profile</tab>
+</bar>
+
+<code>
+<bar>
+    <tab>Home</tab>
+    <tab>Settings</tab>
+    <tab>Profile</tab>
+</bar>
+</code>
+
+<desc>
+    You can mark a tab as selected using the <b>selected</b> attribute:
+</desc>
+
+<bar>
+    <tab>Home</tab>
+    <tab selected>Settings</tab>
+    <tab>Profile</tab>
+</bar>
+
+<code>
+<bar>
+    <tab>Home</tab>
+    <tab selected>Settings</tab>
+    <tab>Profile</tab>
+</bar>
+</code>
+
+<desc>
+    Add navigation with the <b>href</b> attribute to make tabs clickable:
+</desc>
+
+<bar>
+    <tab href="/docs/11-bar.tkml?tab=home">Home</tab>
+    <tab href="/docs/11-bar.tkml?tab=settings">Settings</tab>
+    <tab href="/docs/11-bar.tkml?tab=profile">Profile</tab>
+</bar>
+
+<code>
+<bar>
+    <tab href="/docs/11-bar.tkml?tab=home">Home</tab>
+    <tab href="/docs/11-bar.tkml?tab=settings">Settings</tab>
+    <tab href="/docs/11-bar.tkml?tab=profile">Profile</tab>
+</bar>
+</code>
+
+<desc>
+    Selected tab: <b>
+        <?get.tab || "None selected"?>
+    </b>
+</desc>
+
+<title>Tab Bar with Icons</title>
+
+<desc>
+    You can add icons to tabs using the <b>icon</b> attribute:
+</desc>
+
+<bar>
+    <tab icon="/images/home-icon.png">Home</tab>
+    <tab icon="/images/settings-icon.png">Settings</tab>
+    <tab icon="/images/user-icon.png">Profile</tab>
+</bar>
+
+<code>
+<bar>
+    <tab icon="/images/home-icon.png">Home</tab>
+    <tab icon="/images/settings-icon.png">Settings</tab>
+    <tab icon="/images/user-icon.png">Profile</tab>
+</bar>
+</code>
+
+<desc>
+    For icon-only tabs, just omit the text content:
+</desc>
+
+<bar>
+    <tab icon="/images/home-icon.png"></tab>
+    <tab icon="/images/settings-icon.png"></tab>
+    <tab icon="/images/user-icon.png"></tab>
+</bar>
+
+<code>
+<bar>
+    <tab icon="/images/home-icon.png"></tab>
+    <tab icon="/images/settings-icon.png"></tab>
+    <tab icon="/images/user-icon.png"></tab>
+</bar>
+</code>
+
+
+<title>Practical Example: Content Tabs</title>
+
+<desc>
+    Here's a practical example of using tabs to switch between content sections:
+</desc>
+
+<bar>
+    <tab href="/docs/11-bar.tkml?content=features" <?get.content==='features' ? 'selected="selected"' : '' ?>>Features
+    </tab>
+    <tab href="/docs/11-bar.tkml?content=specs" <?get.content==='specs' ? 'selected="selected"' : '' ?>>Specifications
+    </tab>
+    <tab href="/docs/11-bar.tkml?content=reviews" <?get.content==='reviews' ? 'selected="selected"' : '' ?>>Reviews
+    </tab>
+</bar>
+
+<code>
+<bar>
+    <tab href="/docs/11-bar.tkml?content=features" <?get.content === 'features' ? 'selected="selected"' : ''?>>Features</tab>
+    <tab href="/docs/11-bar.tkml?content=specs" <?get.content === 'specs' ? 'selected="selected"' : ''?>>Specifications</tab>
+    <tab href="/docs/11-bar.tkml?content=reviews" <?get.content === 'reviews' ? 'selected="selected"' : ''?>>Reviews</tab>
+</bar>
+</code>
+
+<?if (get.content === 'features')?>
+<info>
+    <title>Key Features</title>
+    <list>
+        <section>Intuitive user interface</section>
+        <section>Fast performance</section>
+        <section>Cross-platform compatibility</section>
+    </list>
+</info>
+<?/if?>
+
+<? if (get.content === 'specs') {?>
+<info>
+    <title>Technical Specifications</title>
+    <list>
+        <section>Version: 2.0</section>
+        <section>Size: 15MB</section>
+        <section>Requirements: TKML Runtime</section>
+    </list>
+</info>
+<? } ?>
+
+
+
+<? if (get.content === 'reviews') { ?>
+<info>
+    <title>User Reviews</title>
+    <list>
+        <section>★★★★★ "Amazing component!"</section>
+        <section>★★★★☆ "Very useful for navigation."</section>
+        <section>★★★★★ "Easy to implement."</section>
+    </list>
+</info>
+<? } ?>
+
+<footer>
+    <navigation>
+        <prev href="10-dropdown.tkml">Dropdown</prev>
+        <next href="/index.tkml">Home</next>
+    </navigation>
+</footer>

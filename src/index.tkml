@@ -1,9 +1,12 @@
 <header center>
-    <menu href="/menu.tkml" />TKML
+    TKML
 </header>
 <br /><br />
+<p>TKML is a lightweight markup language for building interactive mobile-first web applications.
+    It's perfect for creating app-like interfaces, task managers, documentation portals and other apps that require
+    smooth navigation and dynamic content updates.
+</p>
+<desc>Simply enter a TKML app URL below to explore any tkml website.</desc>
 <input href='/' placeholder='Enter TKML app URL here' />
 <br /><br />
-<navigation>
-    <page href="docs/index.tkml">Documentation</page>
-</navigation>
+<?include("menu.tkml")?>

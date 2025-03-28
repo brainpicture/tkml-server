@@ -34,11 +34,11 @@ Example:
         Checkbox with link
     </checkbox>
 </code>
-<checkbox href="7-checkboxes.tkml?{{get.checked?'':'checked=1'}}" {{get.checked ?'checked':''}}>
+<checkbox href="7-checkboxes.tkml?<?get.checked?'':'checked=1'?>" <?get.checked ?'checked':''?>>
     Checkbox with link
 </checkbox>
-<checkbox id="result" href="7-checkboxes.tkml?{{get.checkedTarget?'':'checkedTarget=1'}}"
-    {{get.checkedTarget?'checked':''}} target="result">
+<checkbox id="result" href="7-checkboxes.tkml?<?get.checkedTarget?'':'checkedTarget=1'?>"
+    <?get.checkedTarget?'checked':''?> target="result">
     Checkbox updating target block
 </checkbox>
 
@@ -53,6 +53,6 @@ Example:
 <footer>
     <navigation>
         <prev href="6-dynamic.tkml">Dynamic content</prev>
-        <next href="8-radio.tkml">Radio Buttons</next>
+        <next href="8-radio.tkml" preload>Radio Buttons</next>
     </navigation>
 </footer>

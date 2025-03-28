@@ -40,8 +40,8 @@ The server automatically maps URL paths to TKML files:
 
 TKML supports JavaScript expressions within double curly braces:
 ```xml
-<title>{{get.title || 'Default Title'}}</title>
-<desc>Current time: {{new Date().toLocaleTimeString()}}</desc>
+<title><?get.title || 'Default Title'?></title>
+<desc>Current time: <?new Date().toLocaleTimeString()?></desc>
 ```
 
 These expressions are evaluated on the server and their results are inserted into the rendered output.
@@ -61,11 +61,11 @@ These expressions are evaluated on the server and their results are inserted int
 You can include other TKML files using the `include()` function:
 
 ```xml
-{{include("header.tkml")}}
+<?include("header.tkml")?>
 <content>
   <!-- Page content here -->
 </content>
-{{include("footer.tkml")}}
+<?include("footer.tkml")?>
 ```
 
 ### Including JavaScript/TypeScript Files
@@ -73,7 +73,7 @@ You can include other TKML files using the `include()` function:
 You can include and execute JavaScript or TypeScript files:
 
 ```xml
-{{include("data-loader.ts")}}
+<?include("data-loader.ts")?>
 ```
 
 The included JS/TS files have access to special context variables and functions.
@@ -127,12 +127,12 @@ if (get.format === 'list') {
 Variables exported from JS/TS files can be used in TKML expressions:
 
 ```xml
-{{include("user-data.ts")}}
+<?include("user-data.ts")?>
 
-<header>Welcome, {{userName}}</header>
+<header>Welcome, <?userName?></header>
 
 <list>
-  {{items.map(item => `<section>${item}</section>`).join('')}}
+  <?items.map(item => `<section>${item}</section>`).join('')?>
 </list>
 ```
 
@@ -224,8 +224,8 @@ When including files, paths are resolved relative to the current file:
 
 ```xml
 <!-- In src/pages/user.tkml -->
-{{include("../components/header.tkml")}} <!-- Resolves to src/components/header.tkml -->
-{{include("./profile.ts")}} <!-- Resolves to src/pages/profile.ts -->
+<?include("../components/header.tkml")?> <!-- Resolves to src/components/header.tkml -->
+<?include("./profile.ts")?> <!-- Resolves to src/pages/profile.ts -->
 ```
 
 ### Circular Include Detection
@@ -255,17 +255,17 @@ The server automatically detects and prevents circular includes, which could cau
   TKML Example App
 </header>
 
-{{include("data-loader.ts")}}
+<?include("data-loader.ts")?>
 
 <desc>
-  Welcome to our example application. Current time: {{new Date().toLocaleTimeString()}}
+  Welcome to our example application. Current time: <?new Date().toLocaleTimeString()?>
 </desc>
 
 <list>
-  {{items.map((item, index) => `
+  <?items.map((item, index) => `
     <section href="item.tkml?id=${index}">${item.title}</section>
-  `).join('')}}
-  <loader href="index.tkml?page={{currentPage + 1}}" />
+  `).join('')?>
+  <loader href="index.tkml?page=<?currentPage + 1?>" />
 </list>
 
 <footer>

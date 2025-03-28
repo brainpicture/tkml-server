@@ -71,11 +71,17 @@
 
 <code language="tkml">
 <list>
-    <section href="profile.tkml" icon="/icons/user.png">Profile</section>
-    <section href="settings.tkml" icon="/icons/gear.png">Settings</section>
-    <section href="help.tkml" icon="/icons/question.png">Help</section>
+    <section href="5-lists.tkml?section=profile" icon="/images/user-icon.png">Profile</section>
+    <section href="5-lists.tkml?section=settings" icon="/images/settings-icon.png">Settings</section>
+    <section href="5-lists.tkml?section=help" icon="/images/question-icon.png">Help</section>
 </list>
 </code>
+
+<list>
+    <section href="5-lists.tkml?section=profile" icon="/images/user-icon.png">Profile</section>
+    <section href="5-lists.tkml?section=settings" icon="/images/settings-icon.png">Settings</section>
+    <section href="5-lists.tkml?section=help" icon="/images/question-icon.png">Help</section>
+</list>
 
 <desc>This creates a menu-like interface where each item navigates to a different page.</desc>
 
@@ -135,6 +141,6 @@
 <footer>
     <navigation>
         <prev href="4-links.tkml">Links</prev>
-        <next href="6-dynamic.tkml">Dynamic content</next>
+        <next href="6-dynamic.tkml" preload>Dynamic content</next>
     </navigation>
 </footer>

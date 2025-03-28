@@ -7,4 +7,4 @@ fetch:
 	curl -o tkml.server.js https://tkml.app/tkml.server.js
 
 dev:
-	bun run server.ts --watch
+	bun run --watch server.ts

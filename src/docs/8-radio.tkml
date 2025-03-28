@@ -37,20 +37,20 @@
 
 <code language="tkml">
 <list>
-    <radio group="color" href="8-radio.tkml?color=red" {{get.color === 'red' ? 'checked' : ''}}>Red</radio>
-    <radio group="color" href="8-radio.tkml?color=green" {{get.color === 'green' ? 'checked' : ''}}>Green</radio>
-    <radio group="color" href="8-radio.tkml?color=blue" {{get.color === 'blue' ? 'checked' : ''}}>Blue</radio>
+    <radio group="color" href="8-radio.tkml?color=red" <?get.color === 'red' ? 'checked' : ''?>>Red</radio>
+    <radio group="color" href="8-radio.tkml?color=green" <?get.color === 'green' ? 'checked' : ''?>>Green</radio>
+    <radio group="color" href="8-radio.tkml?color=blue" <?get.color === 'blue' ? 'checked' : ''?>>Blue</radio>
 </list>
 </code>
 
 <desc>Try selecting different colors:</desc>
 <list>
-    <radio group="color" href="8-radio.tkml?color=red" {{get.color==='red' ? 'checked' : '' }}>Red</radio>
-    <radio group="color" href="8-radio.tkml?color=green" {{get.color==='green' ? 'checked' : '' }}>Green</radio>
-    <radio group="color" href="8-radio.tkml?color=blue" {{get.color==='blue' ? 'checked' : '' }}>Blue</radio>
+    <radio group="color" href="8-radio.tkml?color=red" <?get.color==='red' ? 'checked' : '' ?>>Red</radio>
+    <radio group="color" href="8-radio.tkml?color=green" <?get.color==='green' ? 'checked' : '' ?>>Green</radio>
+    <radio group="color" href="8-radio.tkml?color=blue" <?get.color==='blue' ? 'checked' : '' ?>>Blue</radio>
 </list>
 
-{{get.color ? `<desc>You selected: ${get.color}</desc>` : ''}}
+<?get.color ? `<desc>You selected: ${get.color}</desc>` : ''?>
 
 <br />
 
@@ -62,25 +62,25 @@
 <code language="tkml">
 <list id="theme-result">
     <radio group="theme" href="8-radio.tkml?theme=light" target="theme-result" 
-           {{get.theme === 'light' ? 'checked' : ''}}>Light Theme</radio>
+           <?get.theme === 'light' ? 'checked' : ''?>>Light Theme</radio>
     <radio group="theme" href="8-radio.tkml?theme=dark" target="theme-result" 
-           {{get.theme === 'dark' ? 'checked' : ''}}>Dark Theme</radio>
+           <?get.theme === 'dark' ? 'checked' : ''?>>Dark Theme</radio>
     <radio group="theme" href="8-radio.tkml?theme=system" target="theme-result" 
-           {{get.theme === 'system' ? 'checked' : ''}}>System Theme</radio>
+           <?get.theme === 'system' ? 'checked' : ''?>>System Theme</radio>
 </list>
 </code>
 
 <desc>Try selecting different themes:</desc>
 <list id="theme-result">
-    <radio group="theme" href="8-radio.tkml?theme=light&target=1" target="theme-result" {{get.theme==='light'
-        ? 'checked' : '' }}>Light Theme</radio>
-    <radio group="theme" href="8-radio.tkml?theme=dark&target=1" target="theme-result" {{get.theme==='dark' ? 'checked'
-        : '' }}>Dark Theme</radio>
-    <radio group="theme" href="8-radio.tkml?theme=system&target=1" target="theme-result" {{get.theme==='system'
-        ? 'checked' : '' }}>System Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=light&target=1" target="theme-result" <?get.theme==='light'
+        ? 'checked' : '' ?>>Light Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=dark&target=1" target="theme-result" <?get.theme==='dark' ? 'checked'
+        : '' ?>>Dark Theme</radio>
+    <radio group="theme" href="8-radio.tkml?theme=system&target=1" target="theme-result" <?get.theme==='system'
+        ? 'checked' : '' ?>>System Theme</radio>
 </list>
 
-{{get.theme ? `<desc>Current theme: ${get.theme}</desc>` : ''}}
+<?get.theme ? `<desc>Current theme: ${get.theme}</desc>` : ''?>
 
 <br />
 
@@ -106,6 +106,6 @@
 <footer>
     <navigation>
         <prev href="7-checkboxes.tkml">Checkboxes</prev>
-        <next href="9-loader.tkml">Loader</next>
+        <next href="9-loader.tkml" preload>Loader</next>
     </navigation>
 </footer>

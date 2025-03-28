@@ -1,0 +1,13 @@
+<header center>
+    <back />
+    TKML: Tasks example
+</header>
+<info>
+    <section><img src="/images/promo.png" />Enter your secret promo code from Tonkeeper course
+    </section>
+</info>
+<input placeholder="Enter promo code" />
+<br />
+<footer>
+    <button href="1-tasks-view.tkml" preload="true" width="100%">Check code</button>
+</footer>

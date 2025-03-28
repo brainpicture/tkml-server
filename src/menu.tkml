@@ -1,12 +1,30 @@
-<title center>Intro</title>
-<list id="pager">
-    <section href="/docs/1-hello-world.tkml">Hellow World</section>
+<header center>
+    TKML Documentation
+</header>
+
+<desc>
+    Welcome to the TKML documentation. Choose a topic from the list below to learn more about TKML components and
+    features.
+</desc>
+
+<list>
+    <section href="/docs/1-hello-world.tkml">Hello World</section>
     <section href="/docs/2-button.tkml">Button</section>
     <section href="/docs/3-title-desc.tkml">Title & Desc</section>
     <section href="/docs/4-links.tkml">Links</section>
     <section href="/docs/5-lists.tkml">Lists & Sections</section>
-    <section href="/docs/6-dynamic.tkml">Dynamic content</section>
+    <section href="/docs/6-dynamic.tkml">Dynamic Content</section>
     <section href="/docs/7-checkboxes.tkml">Checkboxes</section>
     <section href="/docs/8-radio.tkml">Radio Buttons</section>
     <section href="/docs/9-loader.tkml">Loader</section>
+    <section href="/docs/10-dropdown.tkml">Dropdown</section>
+    <section href="/docs/11-bar.tkml">Tab Bar</section>
+    <section href="/docs/12-input.tkml">Input Fields</section>
+    <section href="/docs/13-textarea.tkml">Textarea</section>
 </list>
+
+<footer>
+    <navigation>
+        <page href="/index.tkml">Back to Home</page>
+    </navigation>
+</footer>

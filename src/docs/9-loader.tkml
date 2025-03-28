@@ -1,4 +1,4 @@
-{{include("9-loader.ts")}}
+<?include("9-loader.ts")?>
 <header center>
     <menu href="/menu.tkml" />
     TKML: Autoload more content
@@ -70,6 +70,6 @@ Example:
 <footer>
     <navigation>
         <prev href="8-radio.tkml">Radio</prev>
-        <next href="index.tkml">Home</next>
+        <next href="10-dropdown.tkml">Dropdown</next>
     </navigation>
 </footer>

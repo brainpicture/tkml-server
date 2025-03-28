@@ -1,0 +1,131 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Textarea
+</header>
+
+<desc>
+    The textarea component allows users to enter multi-line text content. It's perfect for comments, messages,
+    and other longer text inputs.
+</desc>
+
+<info>
+    <section>
+        The <b>textarea</b> tag creates a resizable text input area that can span multiple lines.
+    </section>
+</info>
+
+<title>Basic Textarea</title>
+
+<desc>
+    A simple textarea without any attributes:
+</desc>
+
+<textarea></textarea>
+
+<code>
+<textarea></textarea>
+</code>
+
+<title>Textarea with Placeholder</title>
+
+<desc>
+    Add a placeholder to provide hints about what to enter:
+</desc>
+
+<textarea placeholder="Enter your comments here..."></textarea>
+
+<code>
+<textarea placeholder="Enter your comments here..."></textarea>
+</code>
+
+<title>Textarea with Default Value</title>
+
+<desc>
+    You can pre-fill a textarea with content:
+</desc>
+
+<textarea>This is some default text that appears in the textarea when the page loads.</textarea>
+
+<code>
+<textarea>This is some default text that appears in the textarea when the page loads.</textarea>
+</code>
+
+<title>Textarea Attributes</title>
+
+<p>
+    Customize textareas with various attributes:
+</p>
+
+<label>Rows (height):</label>
+<textarea rows="3" placeholder="This textarea has 3 rows"></textarea>
+
+<label>Cols (width):</label>
+<textarea cols="30" placeholder="This textarea has 30 columns"></textarea>
+
+<label>Disabled:</label>
+<textarea disabled>This textarea cannot be edited</textarea>
+
+<label>Required:</label>
+<textarea required placeholder="This field is required"></textarea>
+
+<code>
+<textarea rows="3" placeholder="This textarea has 3 rows"></textarea>
+<textarea cols="30" placeholder="This textarea has 30 columns"></textarea>
+<textarea disabled>This textarea cannot be edited</textarea>
+<textarea required placeholder="This field is required"></textarea>
+</code>
+
+<title>
+    Sending Textarea Data
+</title>
+<p>
+    Like input fields, textareas can use the <pill>name</pill> attribute to send data with buttons:
+</p>
+
+<code>
+<label>Your Message:</label>
+<textarea name="message" placeholder="Type your message here..."></textarea>
+<button post="message">Send Message</button>
+</code>
+
+<desc>Example</desc>
+
+<label>Your Message:</label>
+<textarea name="message" placeholder="Type your message here..."></textarea>
+<button post="message">Send Message</button>
+
+<? if (post.message) {?>
+<p>
+    <b>Your message:</b>
+    <pill>
+        <?post.message?>
+    </pill>
+</p>
+<?}?>
+
+<title>Textarea vs Input</title>
+
+<desc>
+    Compare a single-line input with a multi-line textarea:
+</desc>
+
+<label>Single-line input:</label>
+<input placeholder="This can only have one line of text" />
+
+<label>Multi-line textarea:</label>
+<textarea placeholder="This can have multiple lines of text and will expand as needed"></textarea>
+
+<code>
+<label>Single-line input:</label>
+<input placeholder="This can only have one line of text" />
+
+<label>Multi-line textarea:</label>
+<textarea placeholder="This can have multiple lines of text and will expand as needed"></textarea>
+</code>
+
+<footer>
+    <navigation>
+        <prev href="12-input.tkml">Input Fields</prev>
+        <next href="/index.tkml">Home</next>
+    </navigation>
+</footer>

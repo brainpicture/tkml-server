@@ -59,6 +59,6 @@
 <footer>
     <navigation>
         <prev href="2-button.tkml">Button</prev>
-        <next href="4-links.tkml">Links</next>
+        <next href="4-links.tkml" preload>Links</next>
     </navigation>
 </footer>

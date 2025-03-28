@@ -1,0 +1,143 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Input Fields
+</header>
+
+<desc>
+    Input fields allow users to enter text and other data. TKML provides the <b>input</b> tag for creating various types
+    of input fields.
+</desc>
+
+<info>
+    <section>
+        The basic input field is created with the <b>input</b> tag. You can specify the type of input using the
+        <b>type</b> attribute.
+    </section>
+</info>
+
+<title>Text Input</title>
+
+<desc>
+    The default input type is "text", which creates a single-line text input field.
+</desc>
+
+<input placeholder="Enter your name" />
+
+<code>
+<input placeholder="Enter your name" />
+</code>
+
+<title>Input Types</title>
+
+<desc>
+    TKML supports various input types to match different data entry needs:
+</desc>
+
+<label>Text:</label>
+<input type="text" placeholder="Text input" />
+
+<label>Password:</label>
+<input type="password" placeholder="Password" />
+
+<label>Email:</label>
+<input type="email" placeholder="email@example.com" />
+
+<label>Number:</label>
+<input type="number" placeholder="123" />
+
+<label>Tel:</label>
+<input type="tel" placeholder="+1 234 567 8900" />
+
+<label>URL:</label>
+<input type="url" placeholder="https://example.com" />
+
+<code>
+<label>Text:</label>
+<input type="text" placeholder="Text input" />
+
+<label>Password:</label>
+<input type="password" placeholder="Password" />
+
+<label>Email:</label>
+<input type="email" placeholder="email@example.com" />
+
+<label>Number:</label>
+<input type="number" placeholder="123" />
+
+<label>Tel:</label>
+<input type="tel" placeholder="+1 234 567 8900" />
+
+<label>URL:</label>
+<input type="url" placeholder="https://example.com" />
+</code>
+
+<title>Input Attributes</title>
+
+<p>
+    Customize input fields with various attributes:
+</p>
+
+<label>Placeholder:</label>
+<input placeholder="Placeholder text" />
+<label>Value:</label>
+<input value="Prefilled value" />
+<label>Disabled:</label>
+<input disabled value="Can't edit this" />
+<label>Required:</label>
+<input required placeholder="Required field" />
+
+<code>
+<label>Placeholder:</label>
+<input placeholder="Placeholder text" />
+<label>Value:</label>
+<input value="Prefilled value" />
+<label>Disabled:</label>
+<input disabled value="Can't edit this" />
+<label>Required:</label>
+<input required placeholder="Required field" />
+</code>
+
+
+<title>
+    Send data to a server
+</title>
+<p>
+    There is <pill>name</pill> attribute that you can use to reffer to the element via <pill>post</pill> attribute of
+    any button.
+</p>
+
+<code>
+<label>Full Name:</label>
+<input name="name" placeholder="John Doe" />
+<label>Email:</label>
+<input name="email" type="email" placeholder="john@example.com" />
+<button post="name,email">Submit</button>
+</code>
+
+<desc>Example</desc>
+
+<label>Full Name:</label>
+<input name="name" placeholder="John Doe" />
+<label>Email:</label>
+<input name="email" type="email" placeholder="john@example.com" />
+<button post="name,email">Submit</button>
+
+<? if (post.name || post.email) {?>
+<p>
+    <b>Name:</b>
+    <pill>
+        <?post.name?>
+    </pill>
+    <b>Email:</b>
+    <pill>
+        <?post.email?>
+    </pill>
+</p>
+<?}?>
+
+<footer>
+    <navigation>
+        <prev href="11-bar.tkml">Tab Bar</prev>
+        <next href="13-textarea.tkml">Textarea</next>
+    </navigation>
+</footer>

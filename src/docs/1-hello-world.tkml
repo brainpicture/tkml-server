@@ -25,6 +25,6 @@ Hello <b>World</b>
 
 <footer>
     <navigation>
-        <next href="2-button.tkml">Button</next>
+        <next href="2-button.tkml" preload>Button</next>
     </navigation>
 </footer>

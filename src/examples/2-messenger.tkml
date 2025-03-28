@@ -1,0 +1,26 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Tasks example
+</header>
+<list>
+    <section href="2-messenger-chat.tkml?chat=1"><img src="/images/john.jpg" circle="true" />
+        <title>John Doe</title>
+        Hello, how are you?
+    </section>
+    <section href="2-messenger-chat.tkml?chat=2"><img src="/images/rachiel.jpg" circle="true" />
+        <title>Rachel Green</title>
+        What are you doing?
+    </section>
+    <section href="2-messenger-chat.tkml?chat=3"><img src="/images/sofia.jpg" circle="true" />
+        <title>Sofia Sholokhova</title>
+        Let's meet tomorrow
+    </section>
+</list>
+<button width="100%" href="2-messenger-new.tkml">New message</button>
+
+<footer>
+    <navigation>
+        <prev href="1-tasks.tkml">tasks</prev>
+        <next href="/index.tkml" preload>home</next>
+    </navigation>
+</footer>

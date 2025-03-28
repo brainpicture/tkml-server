@@ -1,0 +1,242 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Dropdown
+</header>
+
+<desc>
+    Dropdowns are a common UI element that allow users to select one option from a list of choices.
+    TKML provides a simple <b>dropdown</b> tag to create dropdown menus with selectable options.
+</desc>
+
+<info>
+    <section>
+        The basic dropdown consists of a <b>dropdown</b> tag containing multiple <b>section</b> elements.
+        Each section represents an option in the dropdown.
+    </section>
+</info>
+
+<dropdown name="country">
+    <option>United States</option>
+    <option>Canada</option>
+    <option>Mexico</option>
+</dropdown>
+
+<code>
+<dropdown name="country">
+    <option>United States</option>
+    <option>Canada</option>
+    <option>Mexico</option>
+</dropdown>
+</code>
+
+You can set a default selected option using the <pill>selected</pill> attribute on a section.
+
+<dropdown name="language">
+    <option>English</option>
+    <option selected="selected">Spanish</option>
+    <option>French</option>
+</dropdown>
+
+<code>
+<dropdown name="language">
+    <option>English</option>
+    <option selected="selected">Spanish</option>
+    <option>French</option>
+</dropdown>
+</code>
+
+<desc>
+    You can specify different values for each option using the <b>value</b> attribute.
+    This is useful when the display text differs from the value you want to submit.
+</desc>
+
+<dropdown name="currency">
+    <option value="USD">US Dollar ($)</option>
+    <option value="EUR">Euro (€)</option>
+    <option value="GBP">British Pound (£)</option>
+</dropdown>
+
+<code>
+<dropdown name="currency">
+    <option value="USD">US Dollar ($)</option>
+    <option value="EUR">Euro (€)</option>
+    <option value="GBP">British Pound (£)</option>
+</dropdown>
+</code>
+
+<desc>
+    You can add a placeholder text using the <b>placeholder</b> attribute on the dropdown.
+</desc>
+
+<dropdown name="category" placeholder="Select a category">
+    <option>Electronics</option>
+    <option>Clothing</option>
+    <option>Books</option>
+</dropdown>
+
+<code>
+<dropdown name="category" placeholder="Select a category">
+    <option>Electronics</option>
+    <option>Clothing</option>
+    <option>Books</option>
+</dropdown>
+</code>
+
+<desc>
+    You can disable a dropdown using the <b>disabled</b> attribute.
+</desc>
+
+<dropdown name="plan" disabled="disabled">
+    <option>Basic</option>
+    <option>Premium</option>
+    <option>Enterprise</option>
+</dropdown>
+
+<code>
+<dropdown name="plan" disabled="disabled">
+    <option>Basic</option>
+    <option>Premium</option>
+    <option>Enterprise</option>
+</dropdown>
+</code>
+
+<desc>
+    You can disable specific options using same <b>disabled</b> attribute.
+</desc>
+
+<dropdown name="plan">
+    <option>Basic</option>
+    <option>Premium</option>
+    <option disabled="disabled">Enterprise</option>
+</dropdown>
+
+<code>
+<dropdown name="plan">
+    <option>Basic</option>
+    <option>Premium</option>
+    <option disabled="disabled">Enterprise</option>
+</dropdown>
+</code>
+
+<p>
+    You can use the <b>href</b> attribute to handle dropdown changes.
+    The selected value will be sent as a POST parameter.
+</p>
+
+<dropdown name="theme" href="/docs/10-dropdown.tkml">
+    <option>Light</option>
+    <option>Dark</option>
+    <option>System</option>
+</dropdown>
+
+<code>
+<dropdown name="theme" href="/docs/10-dropdown.tkml">
+    <option>Light</option>
+    <option>Dark</option>
+    <option>System</option>
+</dropdown>
+</code>
+
+<desc>
+    Selected value: <b>
+        <?post.theme || "None selected"?>
+    </b>
+</desc>
+
+<p>
+    You can also set separate <b>href</b> params for each option,
+    this way each change will send user to specific url, you can
+    use this approach to set change via GET params.
+</p>
+
+<dropdown name="theme">
+    <option href="/docs/10-dropdown.tkml?theme=light">Light</option>
+    <option href="/docs/10-dropdown.tkml?theme=dark">Dark</option>
+    <option href="/docs/10-dropdown.tkml?theme=system">System</option>
+</dropdown>
+
+<code>
+<dropdown name="theme">
+    <option href="/docs/10-dropdown.tkml?theme=light">Light</option>
+    <option href="/docs/10-dropdown.tkml?theme=dark">Dark</option>
+    <option href="/docs/10-dropdown.tkml?theme=system">System</option>
+</dropdown>
+</code>
+
+<desc>
+    Selected value: <b>
+        <?get.theme || "None selected"?>
+    </b>
+</desc>
+
+<title>Dropdown Styling</title>
+
+<desc>You can style dropdown options using icons and images:</desc>
+
+<dropdown name="theme">
+    <option icon="/images/user-icon.png">Profile</option>
+    <option icon="/images/settings-icon.png">Settings</option>
+    <option icon="/images/question-icon.png">Help</option>
+    <option>No icon</option>
+</dropdown>
+
+<code>
+<dropdown name="theme">
+    <option icon="/images/user-icon.png">Profile</option>
+    <option icon="/images/settings-icon.png">Settings</option>
+    <option icon="/images/question-icon.png">Help</option>
+    <option>No icon</option>
+</dropdown>
+</code>
+
+<desc>You also can use img tag inside option to display image, you can
+    also use icon and img together, like in example with Canada:</desc>
+
+<dropdown name="country">
+    <option><img src="/images/us.png" />United States</option>
+    <option><img src="/images/uk.png" />United Kingdom</option>
+    <option icon="/images/question-icon.png"><img src="/images/ca.png" />Canada</option>
+    <option><img src="/images/sp.png" />Singapore</option>
+    <option><img src="/images/no.png" />Norway</option>
+    <option><img src="/images/mx.png" />Mexico</option>
+    <option><img src="/images/fn.png" />Finland</option>
+    <option><img src="/images/ae.png" />United Arab Emirates</option>
+</dropdown>
+
+<code>
+<dropdown name="country">
+    <option><img src="/images/us.png" />United States</option>
+    <option><img src="/images/uk.png" />United Kingdom</option>
+    <option icon="/images/question-icon.png"><img src="/images/ca.png" />Canada</option>
+</dropdown>
+</code>
+
+<desc>Dropdown can also be searchable via <b>search</b> attribute:</desc>
+
+<dropdown name="country">
+    <search>Search for country</search>
+    <option><img src="/images/us.png" />United States</option>
+    <option><img src="/images/uk.png" />United Kingdom</option>
+    <option icon="/images/question-icon.png"><img src="/images/ca.png" />Canada</option>
+    <option><img src="/images/sp.png" />Singapore</option>
+    <option><img src="/images/no.png" />Norway</option>
+    <option><img src="/images/mx.png" />Mexico</option>
+    <option><img src="/images/fn.png" />Finland</option>
+    <option><img src="/images/ae.png" />United Arab Emirates</option>
+</dropdown>
+
+<code>
+<dropdown name="country">
+    <search>Search for country</search>
+    <option><img src="/images/us.png" />United States</option>
+    <option><img src="/images/uk.png" />United Kingdom</option>
+    <option icon="/images/question-icon.png"><img src="/images/ca.png" />Canada</option>
+</dropdown>
+</code>
+
+<footer>
+    <navigation>
+        <prev href="9-loader.tkml">Loader</prev>
+        <next href="11-bar.tkml" preload>TabBar</next>
+    </navigation>
+</footer>

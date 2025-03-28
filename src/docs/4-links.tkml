@@ -136,6 +136,6 @@
 <footer>
     <navigation>
         <prev href="3-title-desc.tkml">Title & Desc</prev>
-        <next href="5-lists.tkml">Lists & Sections</next>
+        <next href="5-lists.tkml" preload>Lists & Sections</next>
     </navigation>
 </footer>

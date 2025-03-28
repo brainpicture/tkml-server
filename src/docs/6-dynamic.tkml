@@ -14,8 +14,10 @@
     The button should increment the counter, and the counter should be displayed on the page.
 </desc>
 
-<title>Counter: {{ get.counter | 0 }}</title>
-<button href="6-dynamic.tkml?counter={{(get.counter | 0) + 1}}">Increment</button>
+<title>Counter:
+    <? get.counter | 0 ?>
+</title>
+<button href="6-dynamic.tkml?counter=<?(get.counter | 0) + 1?>">Increment</button>
 
 <info>
     One way to do this is to change the URL of the page when the button is clicked.
@@ -39,9 +41,11 @@ Example:
 <button id="button" target="counter,button" href="6-dynamic.tkml?targetCounter=1">Increment only counter</button>
 </code>
 
-<title id="counter">Counter: {{ get.targetCounter | 0 }}</title>
+<title id="counter">Counter:
+    <? get.targetCounter | 0 ?>
+</title>
 <button id="button" target="counter,button"
-    href="6-dynamic.tkml?targetCounter={{(get.targetCounter | 0) + 1}}">Increment</button>
+    href="6-dynamic.tkml?targetCounter=<? (get.targetCounter | 0) + 1 ?>">Increment</button>
 
 <info>
     <section>
@@ -58,8 +62,10 @@ Example:
 <title id="counter">Counter: 0</title>
 <button id="button" target="counter,button" post="{counter:1}">Increment via POST</button>
 </code>
-<title id="counterPost">Counter: {{post.counter | 0}}</title>
-<button id="buttonPost" target="counterPost,buttonPost" post="counter={{(post.counter | 0) + 1}}">Increment via
+<title id="counterPost">Counter:
+    <? post.counter | 0 ?>
+</title>
+<button id="buttonPost" target="counterPost,buttonPost" post="counter=<?(post.counter | 0) + 1?>">Increment via
     POST</button>
 <info>
     <section>
@@ -70,6 +76,6 @@ Example:
 <footer>
     <navigation>
         <prev href="5-lists.tkml">Lists & Sections</prev>
-        <next href="7-checkboxes.tkml">Checkboxes</next>
+        <next href="7-checkboxes.tkml" preload>Checkboxes</next>
     </navigation>
 </footer>

@@ -1,0 +1,32 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Tasks example
+</header>
+<list>
+    <section href="1-tasks-view.tkml">
+        <img src="/images/innovators.png" />
+        <title>TON Innovators Cup</title>
+        <desc>
+            Enter the TON Innovators Cup, a prestigious competition designed to reward the most creative and impactful
+            projects built on The Open Network.
+        </desc>
+        <pill>2 days left</pill>
+        <pill icon="/images/tonpill.png">Reward: 5 TON</pill>
+    </section>
+    <section href="1-tasks-view-2.tkml">
+        <img src="/images/innovators.png" />
+        <title>Web3 Developers Challenge</title>
+        <desc>
+            Join the Web3 Developers Challenge, an exciting hackathon where you can build groundbreaking
+            decentralized applications.
+        </desc>
+        <pill>2 days left</pill>
+        <pill icon="/images/tonpill.png">Reward: 5 TON</pill>
+    </section>
+</list>
+
+<footer>
+    <navigation>
+        <next href="2-messenger.tkml" preload>messanger</next>
+    </navigation>
+</footer>

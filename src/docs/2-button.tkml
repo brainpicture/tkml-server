@@ -41,6 +41,6 @@
 <footer>
     <navigation>
         <prev href="1-hello-world.tkml">Hello world</prev>
-        <next href="3-title-desc.tkml">Title & Description</next>
+        <next href="3-title-desc.tkml" preload>Title & Description</next>
     </navigation>
 </footer>
