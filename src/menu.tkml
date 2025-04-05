@@ -1,5 +1,5 @@
 <header center>
-    TKML Documentation
+    Documentation
 </header>
 
 <desc>
@@ -7,6 +7,10 @@
     features.
 </desc>
 
+<list>
+    <section href="/index.tkml">Home</section>
+</list>
+<title>Components</title>
 <list>
     <section href="/docs/1-hello-world.tkml">Hello World</section>
     <section href="/docs/2-button.tkml">Button</section>
@@ -21,6 +25,15 @@
     <section href="/docs/11-bar.tkml">Tab Bar</section>
     <section href="/docs/12-input.tkml">Input Fields</section>
     <section href="/docs/13-textarea.tkml">Textarea</section>
+    <section href="/docs/14-menu.tkml">Menu</section>
+    <section href="/docs/15-navigation.tkml">Navigation</section>
+    <section href="/docs/16-autoupdate.tkml">Autoupdate</section>
+</list>
+<br />
+<title>Examples</title>
+<list>
+    <section href="/examples/earn/index.tkml">Tonkeeper Earn</section>
+    <section href="/examples/messenger/index.tkml">Messenger</section>
 </list>
 
 <footer>

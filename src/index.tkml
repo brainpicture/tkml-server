@@ -1,12 +1,40 @@
 <header center>
+    <menu href="/menu.tkml" />
     TKML
 </header>
-<br /><br />
-<p>TKML is a lightweight markup language for building interactive mobile-first web applications.
-    It's perfect for creating app-like interfaces, task managers, documentation portals and other apps that require
-    smooth navigation and dynamic content updates.
+<img src="/images/mood.jpg" />
+<br />
+<p>TKML is a lightweight markup language for building interactive mobile-first applications.
+    It's perfect for creating app-like interfaces, miniapps, and embedded apps of any kind for platforms or messengers
+    where
+    design, performance and user experience are more important than unique design and layout.
 </p>
-<desc>Simply enter a TKML app URL below to explore any tkml website.</desc>
-<input href='/' placeholder='Enter TKML app URL here' />
+<quote>Imagine you want to create a functional website or app, but don't want
+    to spend time on styling or creating layouts.</quote>
+<bullet>TKML does not support any client-side scripting.</bullet>
+<bullet>TKML does not support any styling.</bullet>
+<bullet>TKML does not support layouts, and component nesting is limited.</bullet>
+<box>
+    With such limitations, TKML can be truly <b>cross-platform</b> and natively rendered on all platforms
+    <b>without any browser or webview</b>.
+</box>
+<code>
+<title>It is extremely easy to learn TKML</title>
+<button>Just click Get Started below</button>
+</code>
+<title>How to build dynamic web apps with TKML?</title>
+<text>
+    Despite being a very limited markup language, TKML allows you to create dynamic websites and apps easily.
+    First, TKML takes care of caching and shows loading states when users open new pages.
+    Using the <pill>target</pill> attribute, you can update only desired parts of the page.
+</text>
+<text>
+    Pages can also be preloaded for instant navigation using the <pill>preload</pill> attribute.
+</text>
+<text>
+    Additionally, TKML has a built-in <a href="/docs/16-autoupdate.tkml">autoupdate</a> tag to refresh page content
+    automatically.
+</text>
+<p>The quick start guide will help any developer start using TKML on the same day.</p>
+<button width="100%" center href="/docs/1-hello-world.tkml">Get started</button>
 <br /><br />
-<?include("menu.tkml")?>

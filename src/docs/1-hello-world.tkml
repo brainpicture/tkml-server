@@ -14,7 +14,7 @@ Hello <b>World</b>
 </info>
 <info>
     <p>
-        TKML is like XML but operates at a higher level than HTML.Instead of working with basic HTML elements,
+        TKML is like XML but operates at a higher level than HTML. Instead of working with basic HTML elements,
         TKML provides ready-to-use components that make it easy to build polished applications.
         <br /><br />
         While HTML requires you to style and structure basic elements, TKML components come pre-styled and
@@ -25,6 +25,7 @@ Hello <b>World</b>
 
 <footer>
     <navigation>
+        <prev href="/index.tkml">Home</prev>
         <next href="2-button.tkml" preload>Button</next>
     </navigation>
 </footer>

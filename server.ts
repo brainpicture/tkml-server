@@ -2,7 +2,7 @@ import { watch } from "fs";
 
 const PORT = 8348;
 const ROOT_DIR = './src'; // Root directory with TKML files
-const VERSION = '31';
+const VERSION = '42';
 
 // Import TKML from local file
 import { TKML } from './tkml.server.js';
@@ -19,10 +19,10 @@ const HTML_WRAPPER = `
     <link rel="stylesheet" href="https://tkml.app/styles.min.css?${VERSION}">
     <script src="https://tkml.app/tkml.min.js?${VERSION}"></script>
 </head>
-<body>
-    <div id="container" class="tkml-cont"><?content?></div>
+<body class="dark">
+    <?content?>
     <script>
-        const tkml = new TKML(document.getElementById('container'), { dark: true, URLControl: true, instanceId: <?instanceId?> });
+        const tkml = new TKML(document.getElementById('container-<?instanceId?>'), { dark: true, URLControl: true, instanceId: <?instanceId?> });
         tkml.setCurrentUrl()
         <?js?>
     </script>
@@ -643,21 +643,6 @@ class TKMLRequest {
         return new Response(content, { headers });
     }
 
-    /**
-     * Create an HTML response
-     */
-    createHtmlResponse(content: string): Response {
-        const html = HTML_WRAPPER.replace('<?content?>', content);
-        const headers = new Headers({
-            'Content-Type': 'text/html',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type, Accept',
-            'Cache-Control': 'no-cache'
-        });
-
-        return new Response(html, { headers });
-    }
 
     /**
      * Create an SSR response
@@ -666,7 +651,7 @@ class TKMLRequest {
         const html = HTML_WRAPPER
             .replace('<?content?>', content)
             .replace('<?js?>', js)
-            .replace('<?instanceId?>', instanceId);
+            .replaceAll('<?instanceId?>', instanceId);
 
         const headers = new Headers({
             'Content-Type': 'text/html',
