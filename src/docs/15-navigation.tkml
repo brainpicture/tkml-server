@@ -1,0 +1,74 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Navigation
+</header>
+<desc>Provides structured navigation, typically within a footer.</desc>
+
+<text>
+    The <b>&lt;navigation&gt;</b> tag is used to group navigation links. It helps structure pagination or related page
+    links. Inside <b>&lt;navigation&gt;</b>, you can use <b>&lt;prev&gt;</b>, <b>&lt;next&gt;</b>, and
+    <b>&lt;page&gt;</b>
+    tags.
+</text>
+
+<info>
+    <section>
+        The <b>&lt;navigation&gt;</b> tag itself doesn't render visually but provides context for its child elements
+        like
+        <b>&lt;prev&gt;</b>, <b>&lt;next&gt;</b>, and <b>&lt;page&gt;</b>.
+    </section>
+</info>
+
+<title>Example Structure</title>
+<code>
+<footer>
+    <navigation>
+        <prev href="/previous-page.tkml">Previous Topic</prev>
+        <page href="/topic-index.tkml">Index</page>
+        <next href="/next-page.tkml">Next Topic</next>
+    </navigation>
+</footer>
+</code>
+
+<title>Navigation Elements</title>
+
+<text>
+    <b>&lt;prev href="path"&gt;Text&lt;/prev&gt;</b>: Creates a link styled as a 'previous' navigation element.
+    <b>&lt;next href="path"&gt;Text&lt;/next&gt;</b>: Creates a link styled as a 'next' navigation element.
+    <b>&lt;page href="path"&gt;Text&lt;/page&gt;</b>: Creates a link styled as a general page navigation element, often
+    used
+    linking to an index or home page within the context of navigation.
+</text>
+
+<title>Live Example</title>
+
+<desc>
+    This is how the navigation looks at like:
+</desc>
+
+<navigation>
+    <prev href="/index.tkml">Home</prev>
+    <page href="1-hello-world.tkml">1</page>
+    <page href="2-buttons.tkml">2</page>
+    <page href="3-title-desc.tkml">3</page>
+    <page href="4-links.tkml">4</page>
+    <page href="5-lists.tkml">5</page>
+    <next href="/menu.tkml">Menu</next>
+</navigation>
+
+
+<title>Usage Notes</title>
+<text>
+    The <b>&lt;navigation&gt;</b> tag is most effective within a <b>&lt;footer&gt;</b> for consistent placement at the
+    bottom of
+    the page.
+    - Use descriptive text within the <b>&lt;prev&gt;</b>, <b>&lt;next&gt;</b>, and <b>&lt;page&gt;</b> tags to guide
+    the user.
+</text>
+
+<footer>
+    <navigation>
+        <prev href="/docs/14-menu.tkml">Menu</prev>
+        <next href="/docs/16-autoupdate.tkml">Autoupdate</next>
+    </navigation>
+</footer>

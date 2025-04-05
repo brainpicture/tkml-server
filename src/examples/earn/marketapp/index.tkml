@@ -1,0 +1,27 @@
+<header center>
+    <back href="/examples/earn/index.tkml" />
+    Market App
+</header>
+<info>
+    <img src="/images/marketapp_full.png" /> <!-- Assuming a full image exists, adjust if needed -->
+    <title>Market App</title>
+    <desc>
+        Buy and Sell NFTs on Marketapp and receive weekly rewards. Complete tasks to earn Telegram Stars.
+    </desc>
+    <pill icon="/images/star.png">Telegram Stars</pill> <!-- Using icon from index.tkml -->
+</info>
+<br size="5" />
+
+<desc>
+    Tasks
+</desc>
+<info>
+    <section icon="/images/lock.png">Sell gifts with 0% commission</section>
+    <section icon="/images/lock.png">Buy Stars (50% commission discount)</section>
+    <section icon="/images/lock.png">Buy Premium (50% commission discount)</section>
+</info>
+
+<footer>
+    <button width="100%" href="https://market.app/" external>Go to Market App</button>
+    <!-- Assuming this is the correct link -->
+</footer>

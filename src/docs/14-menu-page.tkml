@@ -1,0 +1,9 @@
+<header>
+    <menu href="14-menu-content.tkml" />
+</header>
+
+<text>
+    This is the main content area. Click the "Open Menu" link in the header to see the side menu.
+</text>
+
+<button href="14-menu.tkml">Go Back</button>

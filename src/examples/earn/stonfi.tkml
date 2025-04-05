@@ -1,0 +1,25 @@
+<header center>
+    <back href="/examples/earn/index.tkml" />
+    StonFi
+</header>
+<info>
+    <img src="/images/stonfi.png" />
+    <title>StonFi</title>
+    <desc>
+        Finish Stonboarding, learn DeFi basics, and earn rewards from STON.fi. Complete tasks to earn GEMSTONs.
+    </desc>
+    <pill icon="/images/tonpill.png">GEMSTONs</pill> <!-- Assuming GEMSTONs based on index.tkml -->
+</info>
+<br size="5" />
+
+<desc>
+    Tasks
+</desc>
+<info>
+    <section icon="/images/lock.png">Exchange in the TON/STON or USDT/STON pair from $30</section>
+    <section icon="/images/lock.png">Liquidity provision in the STON/USDT pair from $50</section>
+</info>
+
+<footer>
+    <button width="100%" href="https://app.ston.fi/" external>Go to StonFi</button>
+</footer>

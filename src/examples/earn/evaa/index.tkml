@@ -1,0 +1,59 @@
+<header center>
+    <back href="/examples/earn/index.tkml" />
+    Evaa protocol
+</header>
+<info>
+    <img src="/images/evaa_full.webp" />
+    <title>Evaa protocol</title>
+    <desc>
+        Join the EVAA Finance competition: supply or borrow assets and get rewarded! The more you participate, the
+        bigger your rewards. Earn EVAA XP for completing tasks.
+    </desc>
+    <pill icon="/images/evaa.png">EVAA XP</pill>
+</info>
+<br size="5" />
+
+<desc>
+    Supply in the ALTS Pool (10 XP each)
+</desc>
+<info>
+    <section icon="/images/lock.png">Supply TON</section>
+    <section icon="/images/lock.png">Supply DOGS</section>
+    <section icon="/images/lock.png">Supply CATI</section>
+    <section icon="/images/lock.png">Supply NOT</section>
+</info>
+<br size="5" />
+
+<desc>
+    Supply in the Main Pool (10 XP each)
+</desc>
+<info>
+    <section icon="/images/lock.png">Supply tsTON</section>
+    <section icon="/images/lock.png">Supply stTON</section>
+    <section icon="/images/lock.png">Supply TON</section>
+</info>
+<br size="5" />
+
+<desc>
+    Supply in the LP Pool (10 XP each)
+</desc>
+<info>
+    <section icon="/images/lock.png">Supply DeDust LP USDT/TON</section>
+    <section icon="/images/lock.png">Supply Storm LP USDT</section>
+    <section icon="/images/lock.png">Supply Storm LP TON</section>
+</info>
+<br size="5" />
+
+<desc>
+    Borrow USDt (Leaderboard Competition)
+</desc>
+<info>
+    <section icon="/images/lock.png">
+        Compete in the leaderboard by borrowing USDt. Top 5000 wallets share an additional 5M EVAA XP proportionally.
+        Rewards calculated at campaign end.
+    </section>
+</info>
+
+<footer>
+    <button width="100%" href="https://app.evaa.finance/" external>Go to EVAA Protocol</button>
+</footer>

@@ -1,0 +1,10 @@
+<header center>
+    <back href="index.tkml" />Messenger: New message
+</header>
+<label>To</label>
+<input name="to" placeholder="Enter name or address" />
+<label>Message</label>
+<textarea name="message" placeholder="Enter message" rows="10"></textarea>
+<footer>
+    <button required="to,message" width="100%" href="sent.tkml">Send</button>
+</footer>

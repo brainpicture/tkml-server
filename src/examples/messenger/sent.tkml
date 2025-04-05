@@ -1,0 +1,5 @@
+<header center>
+    <back href="index.tkml" />Messenger: Dialog
+</header>
+<msg type="success">Message sent successfully</msg>
+<button width="100%" type="secondary" href="index.tkml">Back to messages</button>

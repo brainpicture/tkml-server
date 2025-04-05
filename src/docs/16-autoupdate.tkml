@@ -1,0 +1,55 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Autoupdate
+</header>
+<desc>Automatically refreshes page content at specified intervals</desc>
+
+<text>
+    The <b>&lt;autoupdate&gt;</b> tag allows you to automatically refresh the page content after a specified time
+    interval. This is useful for pages that display real-time data or need to stay current without manual refreshing.
+</text>
+
+<info>
+    <section>
+        The <b>&lt;autoupdate&gt;</b> tag doesn't render any visible content but controls the page's refresh behavior.
+    </section>
+</info>
+
+<title>Basic Usage</title>
+<code>
+<autoupdate in="5s" />
+<text>
+    This page will automatically refresh every 5 seconds.
+</text>
+</code>
+
+<autoupdate in="5s" />
+<text>
+    Generated at:
+    <? new Date().toLocaleTimeString() ?>
+</text>
+
+<title>Attributes</title>
+
+<text>
+    <b>in</b>: Specifies the time interval before refreshing the page. You can use:
+    - Seconds: "20s" (20 seconds)
+    - Minutes: "5m" (5 minutes)
+    - Hours: "1h" (1 hour)
+    if this attribute is not set, the page will refresh immediately.
+</text>
+
+<title>Usage Notes</title>
+<text>
+    - Use <b>&lt;autoupdate&gt;</b> sparingly to avoid excessive server load
+    - Consider user experience when setting the refresh interval
+    - For very frequent updates (less than 10 seconds), consider alternative approaches
+    - The page will completely reload, so any unsaved user input will be lost
+</text>
+
+<footer>
+    <navigation>
+        <prev href="/docs/15-navigation.tkml">Navigation</prev>
+        <next href="/examples/earn/index.tkml">Examples</next>
+    </navigation>
+</footer>

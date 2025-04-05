@@ -1,0 +1,27 @@
+<header center>
+    <menu href="/menu.tkml" />
+    TKML: Menu
+</header>
+<desc>Adds a link to the header that opens a side menu</desc>
+
+<text>
+    The &lt;menu&gt; tag is used to define a link that will appear in the application header (top bar). When clicked,
+    this
+    link opens a side menu containing the content specified by the `href` attribute. If screen is wide enough –
+    menu will be shown all the time.
+</text>
+
+<title>Example</title>
+<code>
+<header>
+    <menu href="14-menu-content.tkml" />
+</header>
+</code>
+<button href="14-menu-page.tkml">Check example</button>
+
+<footer>
+    <navigation>
+        <prev href="/docs/13-textarea.tkml">Textarea</prev>
+        <next href="/docs/15-navigation.tkml">Navigation</next>
+    </navigation>
+</footer>

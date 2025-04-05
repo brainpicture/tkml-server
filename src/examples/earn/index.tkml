@@ -1,0 +1,49 @@
+<header center>
+    <menu href="/menu.tkml" />
+    Tonkeeper Earn
+</header>
+<list>
+    <section href="/examples/earn/tonpunks/index.tkml">
+        <img src="/images/tonpunks.png" />
+        <title>Ton Punks</title>
+        <desc>
+            A collection of 5149 NFTs created for the TON blockchain. Our values are freedom of information,
+            enlightenment and decentralization.
+
+            Start your battle journey with District Clash by winning 3 matches
+        </desc>
+        <pill icon="/images/tonpunks.png">PUNK token</pill>
+    </section>
+    <section href="/examples/earn/evaa/index.tkml">
+        <img src="/images/evaa.png" />
+        <title>Evaa protocol</title>
+        <desc>
+            Join the EVAA Finance competition: supply or borrow assets and get rewarded! The more you participate, the
+            bigger your rewards.
+        </desc>
+        <pill icon="/images/evaa.png">EVAA XP</pill>
+    </section>
+    <section href="/examples/earn/stonfi/index.tkml">
+        <img src="/images/stonfi.png" />
+        <title>StonFi</title>
+        <desc>
+            Finish Stonboarding, learn DeFi basics, and earn rewards from STON.fi
+        </desc>
+        <pill icon="/images/stonfi.png">20 GEMSTONS</pill>
+    </section>
+    <section href="/examples/earn/marketapp/index.tkml">
+        <img src="/images/marketapp.png" />
+        <title>Market App</title>
+        <desc>
+            Buy and Sell NFTs on Marketapp and receive weekly rewards
+        </desc>
+        <pill icon="/images/star.png">Telegram Stars</pill>
+    </section>
+</list>
+
+<footer>
+    <navigation>
+        <prev href="/docs/16-autoupdate.tkml" preload>Autoupdate</prev>
+        <next href="/examples/messenger/index.tkml" preload>Messenger</next>
+    </navigation>
+</footer>

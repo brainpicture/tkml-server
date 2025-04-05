@@ -1,0 +1,43 @@
+<header center>
+    <back href="/examples/earn/index.tkml" />
+    Ton Punks
+</header>
+<info>
+    <img src="/images/tonpunks_full.png" />
+    <title>Ton Punks</title>
+    <desc>
+        A collection of 5149 NFTs created for the TON blockchain. Our values are freedom of information,
+        enlightenment and decentralization.
+    </desc>
+    <pill icon="/images/tonpunks.png">PUNK token</pill>
+</info>
+<br size="5" />
+<desc>
+    One-time tasks:
+</desc>
+<info>
+    <section icon="/images/checkmark-green.png" deactivated><img src="/images/brain.png" />
+        Open 1/3/5 loot boxes
+    </section>
+    <section href="https://punkcity.bot/" external><img src="/images/promo.png" />Collect 1000 bonuses (of any kind)
+    </section>
+    <section icon="/images/lock.png"><img src="/images/disco.png" /> Collect all common box bonuses (at least 1 piece)
+    </section>
+</info>
+<br size="5" />
+<desc>
+    Daily tasks
+</desc>
+<info>
+    <section icon="/images/lock.png"><img src="/images/book.png" />Reach daily reward streak level 2
+    </section>
+    <section icon="/images/lock.png"><img src="/images/chain.png" />Reach daily reward streak level 3
+    </section>
+    <section icon="/images/lock.png"><img src="/images/chain.png" />Reach daily reward streak level 5
+    </section>
+    <section icon="/images/lock.png"><img src="/images/chain.png" />Reach daily reward streak level 10
+    </section>
+</info>
+<footer>
+    <button width="100%" href="https://punkcity.bot/" external>Start first task</button>
+</footer>
