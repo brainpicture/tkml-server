@@ -2,7 +2,7 @@ import { watch } from "fs";
 
 const PORT = 8348;
 const ROOT_DIR = './src'; // Root directory with TKML files
-const VERSION = '42';
+const VERSION = '47';
 
 // Import TKML from local file
 import { TKML } from './tkml.server.js';

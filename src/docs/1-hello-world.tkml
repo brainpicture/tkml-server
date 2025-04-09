@@ -1,5 +1,5 @@
 <header center>
-    <menu href="/menu.tkml" />
+    <menu src="/menu.tkml" />
     TKML: Hello world
 </header>
 <desc>
@@ -12,16 +12,15 @@ Hello <b>World</b>
 <info>
     <p>Hello <b>World</b></p>
 </info>
-<info>
-    <p>
-        TKML is like XML but operates at a higher level than HTML. Instead of working with basic HTML elements,
-        TKML provides ready-to-use components that make it easy to build polished applications.
-        <br /><br />
-        While HTML requires you to style and structure basic elements, TKML components come pre-styled and
-        pre-configured with common functionality built-in. This allows you to focus on building your application
-        rather than implementing common UI patterns from scratch.
-    </p>
-</info>
+<quote>
+    TKML is like XML but operates at a higher level than HTML. Instead of working with basic HTML elements,
+    TKML provides ready-to-use components that make it easy to build polished applications.
+</quote>
+<text>
+    While HTML requires you to style and structure basic elements, TKML components come pre-styled and
+    pre-configured with common functionality built-in. This allows you to focus on building your application
+    rather than implementing common UI patterns from scratch.
+</text>
 
 <footer>
     <navigation>

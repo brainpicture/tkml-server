@@ -1,5 +1,5 @@
 <header center>
-    <menu href="/menu.tkml" />
+    <menu src="/menu.tkml" />
     TKML: Menu
 </header>
 <desc>Adds a link to the header that opens a side menu</desc>
@@ -14,7 +14,7 @@
 <title>Example</title>
 <code>
 <header>
-    <menu href="14-menu-content.tkml" />
+    <menu src="14-menu-content.tkml" />
 </header>
 </code>
 <button href="14-menu-page.tkml">Check example</button>

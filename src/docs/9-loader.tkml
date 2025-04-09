@@ -1,6 +1,6 @@
 <?include("9-loader.ts")?>
 <header center>
-    <menu href="/menu.tkml" />
+    <menu src="/menu.tkml" />
     TKML: Autoload more content
 </header>
 <desc>

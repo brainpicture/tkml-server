@@ -1,5 +1,5 @@
 <header center>
-    <menu href="/menu.tkml" />
+    <menu src="/menu.tkml" />
     TKML: Autoupdate
 </header>
 <desc>Automatically refreshes page content at specified intervals</desc>

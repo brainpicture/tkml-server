@@ -1,5 +1,5 @@
 <header center>
-    <menu href="/menu.tkml" />
+    <menu src="/menu.tkml" />
     TKML: Navigation
 </header>
 <desc>Provides structured navigation, typically within a footer.</desc>
@@ -49,7 +49,7 @@
 <navigation>
     <prev href="/index.tkml">Home</prev>
     <page href="1-hello-world.tkml">1</page>
-    <page href="2-buttons.tkml">2</page>
+    <page href="2-button.tkml">2</page>
     <page href="3-title-desc.tkml">3</page>
     <page href="4-links.tkml">4</page>
     <page href="5-lists.tkml">5</page>

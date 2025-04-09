@@ -251,7 +251,7 @@ The server automatically detects and prevents circular includes, which could cau
 ```xml
 <!-- index.tkml -->
 <header center>
-  <menu href="/menu.tkml" />
+  <menu src="/menu.tkml" />
   TKML Example App
 </header>
 

@@ -1,5 +1,5 @@
 <header center>
-    <menu href="/menu.tkml" />
+    <menu src="/menu.tkml" />
     TKML: Tasks example
 </header>
 <list>
