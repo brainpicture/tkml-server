@@ -28,7 +28,6 @@ console.log('headers', headers);
     <title>Basic Usage</title>
     <code>
 <tkml theme="light">
-    <!-- Your content here -->
     <text>This content will use the light theme</text>
 </tkml>
 </code>

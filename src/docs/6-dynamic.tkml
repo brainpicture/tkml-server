@@ -47,35 +47,32 @@ Example:
 <button id="button" target="counter,button"
     href="6-dynamic.tkml?targetCounter=<? (get.targetCounter | 0) + 1 ?>">Increment</button>
 
-<info>
-    <section>
-        In the example above we update just second counter, and the button below.
+<quote>
+    In the example above we update just second counter, and the button below.
 
-        To optimise traffic – backend can return only updating elements, skipping all the other
+    To optimise traffic – backend can return only updating elements, skipping all the other
 
-        Sometimes you do not want to change the url of the page, in that case you can use POST params
-        to send data to the backend. <b>href</b> param can be skipped to leave url the same.
-    </section>
-</info>
+    Sometimes you do not want to change the url of the page, in that case you can use POST params
+    to send data to the backend. <b>href</b> param can be skipped to leave url the same.
+</quote>
 Example:
 <code>
 <title id="counter">Counter: 0</title>
-<button id="button" target="counter,button" post="{counter:1}">Increment via POST</button>
+<button id="button" target="counter,button" post="counter=1">Increment via POST</button>
 </code>
 <title id="counterPost">Counter:
     <? post.counter | 0 ?>
 </title>
 <button id="buttonPost" target="counterPost,buttonPost" post="counter=<?(post.counter | 0) + 1?>">Increment via
     POST</button>
-<info>
-    <section>
-        This way URL would not update, but any data can be send to the backend.
-    </section>
-</info>
+<text>
+    This way URL would not update, but any data can be send to the backend.<br /><br />
+    <pill>post</pill> param can be set as JSON, querystring, or list of names of elements which values should be taken.
+</text>
 
 <footer>
     <navigation>
-        <prev href="5-lists.tkml">Lists & Sections</prev>
+        <prev href=" 5-lists.tkml">Lists & Sections</prev>
         <next href="7-checkboxes.tkml" preload>Checkboxes</next>
     </navigation>
 </footer>

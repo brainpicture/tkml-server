@@ -130,7 +130,7 @@
     </tab>
 </bar>
 
-<? if (get.content === 'features') { ?>
+<? if (get.content === 'features' || !get.content) { ?>
 <title>Key Features</title>
 <list>
     <section>Intuitive user interface</section>
