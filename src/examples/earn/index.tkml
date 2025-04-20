@@ -43,7 +43,7 @@
 
 <footer>
     <navigation>
-        <prev href="/docs/16-autoupdate.tkml" preload>Autoupdate</prev>
+        <prev href="/docs/17-themes.tkml" preload>Themes</prev>
         <next href="/examples/messenger/index.tkml" preload>Messenger</next>
     </navigation>
 </footer>

@@ -148,6 +148,7 @@ class TKMLRequest {
     private readonly path: string;
     private readonly getParams: Record<string, string>;
     private readonly postParams: Record<string, string>;
+    private readonly headersParams: Record<string, string>;
     private readonly processingFiles: Set<string> = new Set();
     private finished: boolean = false;
     private finishedResult: string = '';
@@ -159,6 +160,12 @@ class TKMLRequest {
         this.path = this.normalizePath(this.url.pathname);
         this.getParams = Object.fromEntries(this.url.searchParams.entries());
         this.postParams = {};
+
+        // Initialize headers from request
+        this.headersParams = {};
+        this.req.headers.forEach((value, key) => {
+            this.headersParams[key.toLowerCase()] = value;
+        });
     }
 
     /**
@@ -212,7 +219,7 @@ class TKMLRequest {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-                'Access-Control-Allow-Headers': 'Content-Type, Accept',
+                'Access-Control-Allow-Headers': 'Content-Type, Accept, Theme',
                 'Access-Control-Max-Age': '86400' // 24 hours
             }
         });
@@ -381,6 +388,7 @@ class TKMLRequest {
                     const context = {
                         get: this.getParams,
                         post: this.postParams,
+                        headers: this.headersParams,
                         exports: {},
                         finish: (content: string) => {
                             this.finished = true;
@@ -397,6 +405,7 @@ class TKMLRequest {
                         return (async function() {
                             const get = context.get;
                             const post = context.post;
+                            const headers = context.headers;
                             const finish = context.finish;
                             const export_ = context.export;
                             ${fileContent}
@@ -405,9 +414,6 @@ class TKMLRequest {
                     `);
 
                     const exports = await asyncFunction(context);
-
-                    console.log('ASYNC FUNC CALLED exports:', exports);
-                    console.log('this.finished:', this.finished);
 
                     // If finish() was called, return the saved result
                     if (this.finished) {
@@ -597,11 +603,11 @@ class TKMLRequest {
                 },
                 get: this.getParams,
                 post: this.postParams,
+                headers: this.headersParams,
                 // Add all exports from included JS/TS files
                 ...allExports
             };
 
-            console.log('functionBody:', functionBody);
 
             // Create an async function to execute the code
             const asyncFunction = new Function('sandbox', `
@@ -668,7 +674,6 @@ class TKMLRequest {
      * Handle the TKML request with caching
      */
     async handle(): Promise<Response> {
-        console.log('URL', this.req.url);
 
         // Handle CORS preflight requests
         const corsResponse = this.handleCorsPreflightRequest();
@@ -683,7 +688,6 @@ class TKMLRequest {
 
         // Form full path to file
         const filePath = `${ROOT_DIR}/${this.path}`;
-        console.log('filePath:', filePath);
 
         try {
             // Check if file exists

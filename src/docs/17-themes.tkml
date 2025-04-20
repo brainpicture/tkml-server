@@ -1,0 +1,77 @@
+<?
+let theme = post.theme || headers.theme;
+console.log('theme here', theme);
+console.log('headers', headers);
+?>
+
+<tkml <?post.theme ? 'theme="' + post.theme + '"' : "" ?>>
+    <header center>
+        <menu src="/menu.tkml" />
+        TKML: Themes
+    </header>
+    <desc>Control the visual theme of your TKML application</desc>
+
+    <text>
+        The <b>&lt;tkml&gt;</b> tag with the <b>theme</b> attribute allows you to control the visual appearance of your
+        application by setting the color theme. TKML supports both light and dark themes.
+        This tag is optional and if not specified, the theme will be determined by the user's system preferences or
+        inherited from previous page visited.
+    </text>
+
+    <info>
+        <section>
+            The <b>&lt;tkml&gt;</b> tag should wrap your entire content and is usually the root element of your
+            document.
+        </section>
+    </info>
+
+    <title>Basic Usage</title>
+    <code>
+<tkml theme="light">
+    <!-- Your content here -->
+    <text>This content will use the light theme</text>
+</tkml>
+</code>
+
+    <title>Theme Attributes</title>
+
+    <text>
+        <b>theme</b>: Specifies the color theme. Values can be:
+        - "light": Uses the light color scheme
+        - "dark": Uses the dark color scheme
+    </text>
+
+    <title>Theme Switching Example</title>
+
+    <desc>
+        Use this checkbox to toggle between light and dark themes:
+    </desc>
+
+    <title>Theme Toggle</title>
+    <radio name="theme" post="theme" value="light" <?theme=="light" ? "checked" : "" ?>
+        href="/docs/17-themes.tkml">Light</radio>
+    <radio name="theme" post="theme" value="dark" <?theme=="dark" ? "checked" : "" ?> href="/docs/17-themes.tkml">Dark
+    </radio>
+
+    <title>Programmatic Theme Control</title>
+
+    <code>
+<checkbox name="mode" href="/docs/17-themes.tkml">
+    Dark Mode
+</checkbox>
+</code>
+
+    <title>Usage Notes</title>
+    <text>
+        - The theme setting affects the entire document
+        - You can change themes dynamically by updating the page with <b>&lt;tkml&gt;</b> tag added.
+        - The default theme is typically determined by the user's system preferences
+    </text>
+
+    <footer>
+        <navigation>
+            <prev href="/docs/16-autoupdate.tkml">Autoupdate</prev>
+            <next href="/examples/earn/index.tkml">Examples</next>
+        </navigation>
+    </footer>
+</tkml>
