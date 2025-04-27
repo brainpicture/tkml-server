@@ -1,6 +1,7 @@
 <header center>
     <menu src="/menu.tkml" />
     TKML: Menu
+    <menu right src="14-menu-right.tkml" icon="/images/github-logo.svg" />
 </header>
 <desc>Adds a link to the header that opens a side menu</desc>
 
@@ -18,6 +19,14 @@
 </header>
 </code>
 <button href="14-menu-page.tkml">Check example</button>
+
+<quote>
+    Menu also support custom icons, for example to set menu like one on the top-right corner of this page
+    you can use the following code:
+</quote>
+<code>
+    <menu right src="14-menu-right.tkml" icon="/images/github-logo.svg" />
+</code>
 
 <footer>
     <navigation>

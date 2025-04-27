@@ -2,7 +2,7 @@ import { watch } from "fs";
 
 const PORT = 8348;
 const ROOT_DIR = './src'; // Root directory with TKML files
-const VERSION = '47';
+const VERSION = '48';
 
 // Import TKML from local file
 import { TKML } from './tkml.server.js';
@@ -19,7 +19,7 @@ const HTML_WRAPPER = `
     <link rel="stylesheet" href="https://tkml.app/styles.min.css?${VERSION}">
     <script src="https://tkml.app/tkml.min.js?${VERSION}"></script>
 </head>
-<body class="dark">
+<body>
     <?content?>
     <script>
         const tkml = new TKML(document.getElementById('container-<?instanceId?>'), { dark: true, URLControl: true, instanceId: <?instanceId?> });
